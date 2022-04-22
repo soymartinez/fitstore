@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Navbar from '../components/navbar'
 import Logo from '../components/logo'
-import Button from '../components/botton'
+import Button from '../components/button'
 
 export default function Home() {
   return (
