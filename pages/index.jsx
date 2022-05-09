@@ -104,7 +104,7 @@ export default function Home({ data }) {
 
 export async function getStaticProps() {
   try {
-    const res = await fetch('http://localhost:3000/api/products')
+    const res = await fetch('http://localhost:3000/api/products' || 'https://fitstore.vercel.app/api/products')
     const data = await res.json()
     return {
       props: {
