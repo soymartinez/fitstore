@@ -19,13 +19,15 @@ export default function Navbar() {
         <>
             <nav className={`fixed border-b border-transparent transition-colors duration-300 py-5 top-0 inset-x-0 z-50 ${scroll ? 'scrolled ease-in' : 'ease-out'}`}>
                 <div className="container lg:px-32 md:px-12 px-8 flex justify-between items-center bg-transparent">
-                    <a href="/" className="flex items-center">
-                        <Link href={"/"}>
-                            <span className='name cursor-pointer'>
-                                Fitstore
-                            </span>
-                        </Link>
-                    </a>
+                    <Link href={'/'}>
+                        <a className="flex items-center">
+                            <Link href={"/"}>
+                                <span className='name cursor-pointer'>
+                                    Fitstore
+                                </span>
+                            </Link>
+                        </a>
+                    </Link>
                     <div className='flex items-center bg-transparent'>
                         <Link href={'/orders'}>
                             <h2 className='cursor-pointer mx-5 md:mx-10 bg-transparent'>
