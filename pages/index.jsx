@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Navbar from '../components/navbar'
 import Logo from '../components/logo'
 import Button from '../components/button'
+import Image from 'next/image'
 
 export default function Home({ data }) {
   return (
@@ -28,8 +29,8 @@ export default function Home({ data }) {
         <section className='container lg:px-32 md:px-12 px-8 flex flex-col items-start overflow-hidden'>
           <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
             <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center pro-gainer-image">
-              <div className="my-auto bg-transparent">
-                <img src="./images/PRO.png" className='w-72 h-72 md:w-full md:h-full' alt="" />
+              <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] relative">
+                <Image src={'/images/PRO.png'} layout='fill' className='' alt=""></Image>
               </div>
             </div>
             <div className='mt-4 md:mt-0'>
@@ -60,11 +61,13 @@ export default function Home({ data }) {
 
         <section className='container lg:px-32 md:px-12 px-8 py-20'>
           <h2 className='text-2xl font-semibold mb-4 text-[#3081ed]'>Lista de productos</h2>
-          <div className='flex gap-2 overflow-x-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-700'>
+          <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-700 rounded-md'>
             {
               data.map(({ id, name, price, image, description }) => (
                 <article key={id} className='p-4 bg-[#222537] rounded-md'>
-                  <img src={image} className='max-w-max' alt={name}/>
+                  <div className='w-[150px] h-[150px] relative'>
+                    <Image src={image} layout='fill' alt={name}></Image>
+                  </div>
                   <h3 className='subtitle text-2xl text-white mt-2 font-semibold'>{name}</h3>
                   <h5>{description}</h5>
                   <h5 className='text-xl font-semibold'>$ {price}</h5>
@@ -76,9 +79,6 @@ export default function Home({ data }) {
       </main>
 
       <style jsx>{`
-        img {
-          width: auto;
-        }
         .title {
           font-weight: 700;
           letter-spacing: -.05em;
@@ -104,7 +104,10 @@ export default function Home({ data }) {
 
 export async function getStaticProps() {
   try {
-    const res = await fetch('http://localhost:3000/api/products' || 'https://fitstore.vercel.app/api/products')
+    const url = "development" === process.env.NODE_ENV
+    ? "http://localhost:3000/api/products"
+    : "https://fitstore.vercel.app/api/products"
+    const res = await fetch(url)
     const data = await res.json()
     return {
       props: {
@@ -112,7 +115,10 @@ export async function getStaticProps() {
       }
     }
   } catch (error) {
-    console.log(error);
+    return {
+      props: {
+        data: []
+      }
+    }
   }
-}
-
+} 
