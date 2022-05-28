@@ -1,22 +1,20 @@
 import { randomColor } from "../styles/utils";
 import { useState, useEffect } from "react";
 
-
-const IconProfile = () => {
+export default function Icon({ width, height }) {
     const [color, setColor] = useState(randomColor());
     useEffect(() => setColor(randomColor()), [])
     return (
         <>
-            <span></span>
+            <div className='icon'></div>
             <style jsx>{`
-                span {
-                    width: 40px;
-                    height: 40px;
+                .icon {
+                    width: ${width}px;
+                    height: ${height}px;
                     border-radius: 50px;
-                    background: linear-gradient(135deg, rgba(151, 83, 225, 0.5) 0%, rgba(229, 229, 229, 0.5) 100%), ${color}               
+                    background: linear-gradient(135deg, rgba(151, 83, 225, 0.5) 0%, rgba(229, 229, 229, 0.5) 100%), ${color}
                 }
             `}</style>
         </>
-    );
+    )
 }
-export default IconProfile;
