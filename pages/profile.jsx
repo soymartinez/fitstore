@@ -4,11 +4,10 @@ import { TiUserOutline } from 'react-icons/ti';
 import { BiLogOutCircle } from 'react-icons/bi';
 
 import Layout from '../components/layout';
-import Image from 'next/image';
 import Formbutton from 'components/formbutton';
 import Icon from 'components/icon';
 
-export default function profile() {
+export default function Profile() {
     const router = useRouter();
     return (
         <Layout title={'Profile'}>
