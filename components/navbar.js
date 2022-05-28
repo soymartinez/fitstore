@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import IconProfile from './icon'
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Icon from './icon';
 
 export default function Navbar() {
 
@@ -15,28 +16,34 @@ export default function Navbar() {
         });
     }, []);
 
+    const router = useRouter();
+
     return (
         <>
-            <nav className={`fixed border-b border-transparent transition-colors duration-300 py-5 top-0 inset-x-0 z-50 ${scroll ? 'scrolled ease-in' : 'ease-out'}`}>
-                <div className="container lg:px-32 md:px-12 px-8 flex justify-between items-center bg-transparent">
+            <nav className={`fixed border-b border-transparent transition-colors duration-300 py-5 top-0 inset-x-0 z-50 
+                            ${scroll ? 'scrolled ease-in' : 'ease-out'}`}>
+                <div className="container lg:px-32 md:px-8 px-4 flex justify-between items-center">
                     <Link href={'/'}>
                         <a className="flex items-center">
-                            <Link href={"/"}>
+                            <Link href={'/'}>
                                 <span className='name cursor-pointer'>
                                     Fitstore
                                 </span>
                             </Link>
                         </a>
                     </Link>
-                    <div className='flex items-center bg-transparent'>
+                    <div className='flex items-center'>
                         <Link href={'/orders'}>
-                            <h2 className='cursor-pointer mx-5 md:mx-10 bg-transparent'>
+                            <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
+                                            ${router.asPath == '/orders' ? 'text-white' : ''}`}>
                                 pedidos
                             </h2>
                         </Link>
                         <Link href={"/profile"}>
-                            <h2 className='cursor-pointer md:w-24 justify-between ml-5 md:ml-10 flex items-center bg-transparent'>
-                                <IconProfile />
+                            <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
+                                            flex items-center hover:text-white
+                                            ${router.asPath == '/profile' ? 'text-white' : ''}`}>
+                                <Icon width={40} height={40}/>
                                 <span className='md:block hidden bg-transparent'>perfil</span>
                             </h2>
                         </Link>
