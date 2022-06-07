@@ -6,9 +6,8 @@ export default function Formbutton({ text }) {
     useEffect(() => setColor(randomColor()), [])
     return (
         <>
-            <button className='md:w-20 w-full relative text-center overflow-hidden rounded-lg'>
-                <div className={`w-[200%] h-10
-            hover:w-full transition-all duration-300`}>
+            <button className='w-full relative text-center overflow-hidden rounded-lg'>
+                <div className={`w-[200%] h-10 hover:w-full transition-all duration-300`}>
                     <span className='absolute text-center py-2 text-white left-0 w-full'>
                         {text}
                     </span>
