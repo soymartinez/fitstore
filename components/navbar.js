@@ -1,10 +1,11 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Icon from './icon';
 
-export default function Navbar() {
-
+export default function Navbar({ image, session }) {
+    const router = useRouter();
     const [scroll, setScroll] = useState(false);
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -14,9 +15,8 @@ export default function Navbar() {
                 setScroll(false);
             }
         });
+        window.scrollY > 0 ? setScroll(true) : setScroll(false)
     }, []);
-
-    const router = useRouter();
 
     return (
         <>
@@ -32,22 +32,62 @@ export default function Navbar() {
                             </Link>
                         </a>
                     </Link>
-                    <div className='flex items-center'>
-                        <Link href={'/orders'}>
-                            <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
+                    {
+                        session === 'loading' ?
+                            <div className='flex items-center ease-out duration-500'>
+                                <div className='mx-5 md:mx-10'>
+                                    <h2 className='text-gray-700 bg-gray-700 animate-pulse rounded-full'>
+                                        pedidos
+                                    </h2>
+                                </div>
+                                <h2 className='md:w-24 ml-5 md:ml-10 flex justify-between items-center'>
+                                    <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
+                                    <div className='bg-gray-700 animate-pulse rounded-full'>
+                                        <span className='md:block hidden text-gray-700'>perfil</span>
+                                    </div>
+                                </h2>
+                            </div>
+                            : ''
+                    }
+                    {
+                        session === 'unauthenticated' ?
+                            <Link href={'/auth/signin'}>
+                                <h2 className={`cursor-pointer hover:text-white hover:animate-none animate-pulse
+                                            ${router.asPath == '/auth/signin' ? 'text-white animate-none' : ''}`}>
+                                    inicia sesión
+                                </h2>
+                            </Link>
+                            : ''
+                    }
+                    {
+                        session === 'authenticated' ?
+                            <div className='flex items-center'>
+                                <Link href={'/orders'}>
+                                    <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
                                             ${router.asPath == '/orders' ? 'text-white' : ''}`}>
-                                pedidos
-                            </h2>
-                        </Link>
-                        <Link href={"/profile"}>
-                            <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
-                                            flex items-center hover:text-white
-                                            ${router.asPath == '/profile' ? 'text-white' : ''}`}>
-                                <Icon width={40} height={40}/>
-                                <span className='md:block hidden bg-transparent'>perfil</span>
-                            </h2>
-                        </Link>
-                    </div>
+                                        pedidos
+                                    </h2>
+                                </Link>
+                                <Link href={'/profile'}>
+                                    <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
+                                            flex items-center hover:text-white ease-in
+                                            ${router.asPath == '/profile'
+                                            ? 'text-white' : ''}`}>
+                                        <div className={`${router.asPath == '/profile'
+                                            ? 'border-white rounded-full'
+                                            : 'border-none md:p-0 p-[2px]'} md:border-none border-2`}>
+                                            {
+                                                image
+                                                    ? <Image src={image} width={40} height={40} alt={'profile'} />
+                                                    : <Icon width={40} height={40} />
+                                            }
+                                        </div>
+                                        <span className='md:block hidden'>perfil</span>
+                                    </h2>
+                                </Link>
+                            </div>
+                            : ''
+                    }
                 </div>
             </nav>
             <style jsx>{`
