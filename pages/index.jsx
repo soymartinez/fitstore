@@ -2,6 +2,7 @@ import Logo from '../components/logo'
 import Button from '../components/button'
 import Image from 'next/image'
 import Layout from '../components/layout'
+import Link from 'next/link'
 
 export default function Home({ data }) {
   return (
@@ -16,11 +17,11 @@ export default function Home({ data }) {
 
         <Logo />
       </header>
-      
+
       <section className='container lg:px-32 md:px-8 px-4 flex flex-col items-start overflow-hidden'>
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
           <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center pro-gainer-image">
-            <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] relative">
+            <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
               <Image src={'/images/PRO.png'} layout='fill' className='' alt=""></Image>
             </div>
           </div>
@@ -52,16 +53,24 @@ export default function Home({ data }) {
 
       <section className='container lg:px-32 md:px-8 px-4 py-20'>
         <h2 className='text-2xl font-semibold mb-4 text-[#3081ed]'>Lista de productos</h2>
-        <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-700 rounded-md'>
+        <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
+          scrollbar-thumb-slate-700 rounded-md pb-4'>
           {
-            data.map(({ id, name, price, image, description }) => (
-              <article key={id} className='p-4 bg-[#222537] rounded-md'>
-                <div className='w-[150px] h-[150px] relative'>
-                  <Image src={image} layout='fill' alt={name}></Image>
-                </div>
-                <h3 className='subtitle text-2xl text-white mt-2 font-semibold'>{name}</h3>
-                <h5>{description}</h5>
-                <h5 className='text-xl font-semibold'>$ {price}</h5>
+            data.products.map(({ id, name, brand, price, image }) => (
+              <article key={id} className='p-4 border border-solid border-slate-700 bg-[#222537] 
+                  rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
+                <Link href={`/${id}`}>
+                  <div className='cursor-pointer'>
+                    <div className='relative w-56'>
+                      <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name}/>
+                    </div>
+                    <div className='mt-2'>
+                      <h3 className='subtitle text-xl text-white font-semibold'>{name}</h3>
+                      <h5>{brand}</h5>
+                      <h5 className='text-xl font-semibold py-1 text-white'>$ {price}</h5>
+                    </div>
+                  </div>
+                </Link>
               </article>
             ))
           }
@@ -92,7 +101,7 @@ export default function Home({ data }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const res = await fetch(process.env.API_URL + '/products')
     const data = await res.json()
