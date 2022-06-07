@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { TiUserOutline } from 'react-icons/ti';
 import { BiLogOutCircle } from 'react-icons/bi';
@@ -6,14 +7,18 @@ import { BiLogOutCircle } from 'react-icons/bi';
 import Layout from '../components/layout';
 import Formbutton from 'components/formbutton';
 import Icon from 'components/icon';
+import Image from 'next/image';
+import { useState } from 'react';
 
-export default function Profile() {
+export default function Profile({ data }) {
+    const { user: { name, email, image } } = data;
+    const [imagen, setImagen] = useState(image);
     const router = useRouter();
     return (
         <Layout title={'Profile'}>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
                 <h1 className={`font-bold text-3xl text-white md:pb-7 my-4`}>
-                    Martinez
+                    {name}
                 </h1>
 
                 <section className='md:flex'>
@@ -26,13 +31,12 @@ export default function Profile() {
                                     <TiUserOutline className='text-2xl' /><span className='ml-3'>General</span>
                                 </div>
                             </Link>
-                            <Link href={'/profile'}>
+                            <div onClick={() => signOut()}>
                                 <div className={`flex mb-2 cursor-pointer items-center hover:text-white
-                                            md:hover:bg-[#222537] lg:mr-8 md:mr-4 md:px-3 py-2 rounded-md 
-                                            ${router.asPath === '/profile/orders' ? 'text-white' : ''}`}>
+                                            md:hover:bg-[#222537] lg:mr-8 md:mr-4 md:px-3 py-2 rounded-md`}>
                                     <BiLogOutCircle className='text-2xl' /><span className='ml-3'>Salir</span>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                     <div className='rounded-xl border border-solid border-slate-700 bg-[#222537] 
@@ -45,9 +49,9 @@ export default function Profile() {
                             <div className='md:flex gap-2'>
                                 <input className='lg:max-w-xs h-min w-full rounded-lg px-4 py-2 text-white bg-[#222537] 
                                     border border-slate-700 hover:border-slate-500 my-2
-                                    focus:border-blue-500 focus:outline-none' type='text'
+                                    focus:border-blue-500 focus:outline-none' type='text' defaultValue={name}
                                     placeholder='nombre' />
-                                <div className='md:mt-2'>
+                                <div className='md:mt-2 md:w-28'>
                                     <Formbutton text='Guardar' />
                                 </div>
                             </div>
@@ -57,14 +61,22 @@ export default function Profile() {
                                 <h1 className='font-bold text-white text-xl'>Avatar</h1>
                                 <div className='lg:my-0 lg:mx-auto lg:py-2 
                                     my-6 row-span-2 col-start-3 col-span-1'>
-                                    <Icon width={100} height={100} />
+                                    {
+                                        imagen
+                                            ?
+                                            <div className='w-28'>
+                                                <Image src={imagen} className='rounded-full' layout={'responsive'} width={200} height={200} />
+                                            </div>
+                                            : <Icon width={100} height={100} />
+                                    }
                                 </div>
                                 <div className='md:flex lg:col-span-2 gap-2'>
                                     <input className='lg:max-w-xs h-min w-full rounded-lg px-4 py-2 text-white bg-[#222537] 
                                     border border-slate-700 hover:border-slate-500 my-2
-                                    focus:border-blue-500 focus:outline-none' type='text'
+                                    focus:border-blue-500 focus:outline-none' type='text' defaultValue={imagen}
+                                        onChange={(e) => setImagen(e.target.value)}
                                         placeholder='https://avatar-url.png' />
-                                    <div className='md:mt-2'>
+                                    <div className='md:mt-2 md:w-28'>
                                         <Formbutton text='Guardar' />
                                     </div>
                                 </div>
@@ -78,9 +90,9 @@ export default function Profile() {
                             <div className='md:flex gap-2'>
                                 <input className='lg:max-w-xs h-min w-full rounded-lg px-4 py-2 text-white bg-[#222537] 
                                     border border-slate-700 hover:border-slate-500 my-2
-                                    focus:border-blue-500 focus:outline-none' type='email'
+                                    focus:border-blue-500 focus:outline-none' type='email' defaultValue={email}
                                     placeholder='correo@ejemplo.com' />
-                                <div className='md:mt-2'>
+                                <div className='md:mt-2 md:w-28'>
                                     <Formbutton text='Guardar' />
                                 </div>
                             </div>
@@ -90,4 +102,21 @@ export default function Profile() {
             </div>
         </Layout>
     )
+}
+
+export async function getServerSideProps(context) {
+    const data = await getSession(context)
+
+    if (!data) return {
+        redirect: {
+            destination: '/',
+            permanent: false
+        }
+    }
+
+    return {
+        props: {
+            data,
+        }
+    }
 }
