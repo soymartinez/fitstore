@@ -14,7 +14,7 @@ export default async (req, res) => {
     case "GET":
       try {
         const task = await Task.findById(id);
-        if (!task) return res.status(404).json({ msg: "Task does not exists" });
+        if (!task) return res.status(404).json({ msg: "Task does not exxists" });
         return res.status(200).json(task);
       } catch (error) {
         return res.status(400).json({ msg: error.message });
@@ -37,7 +37,7 @@ export default async (req, res) => {
       case "DELETE":
         try {
           const task = await Task.deleteOne({ _id: id });
-          if (!movie) {
+          if (!Task) {
             return res.status(400).json({ success: false });
           }
           res.status(200).json({ success: true, data: {} });

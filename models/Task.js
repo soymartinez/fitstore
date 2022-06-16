@@ -36,7 +36,7 @@ const TaskSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: [200, "title cannot be grater than 200 characters"],
+      maxlength: [900, "title cannot be grater than 200 characters"],
     },
     image: {
       type: String,
@@ -48,7 +48,7 @@ const TaskSchema = new Schema(
     taste: {
       type: Array,
       required: [false, "The taste is required "],
-      unique: true,
+      unique: false,
       trim: true,
       maxlength: [400, "title cannot be grater than 400 characters"],
     }
