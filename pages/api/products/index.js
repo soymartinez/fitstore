@@ -1,8 +1,5 @@
-import Task from "../../../models/Task";
-import { dbConnect } from "/utils/moongose";
-
-
-
+import Product from 'models/Product'
+import { dbConnect } from 'utils/moongose'
 
 dbConnect();
 
@@ -12,16 +9,16 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const tasks = await Task.find();
-        return res.status(200).json(tasks);
+        const products = await Product.find();
+        return res.status(200).json(products);
       } catch (error) {
         return res.status(400).json({ msg: error.message });
       }
     case "POST":
       try {
-        const newTask = new Task(body);
-        const savedTask = await newTask.save();
-        return res.status(201).json(savedTask);
+        const newProduct = new Product(body);
+        const savedProduct = await newProduct.save();
+        return res.status(201).json(savedProduct);
       } catch (error) {
         return res.status(400).json({ msg: error.message });
       }
