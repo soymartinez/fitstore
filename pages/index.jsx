@@ -56,7 +56,7 @@ export default function Home({ data }) {
         <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
           scrollbar-thumb-slate-700 rounded-md pb-4'>
           {
-            data.products.map(({ id, name, brand, price, image }) => (
+            data.map(({ id, name, brand, price, image }) => (
               <article key={id} className='p-4 border border-solid border-slate-700 bg-[#222537] 
                   rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
                 <Link href={`/${id}`}>

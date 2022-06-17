@@ -7,7 +7,7 @@ import { AiFillCloseCircle, AiOutlineShopping } from "react-icons/ai"
 import { TbShoppingCartOff, TbShoppingCartPlus } from "react-icons/tb"
 
 export default function ProductDetails({ data }) {
-    const { name, brand, weight, price, toast, description, image } = data
+    const { name, brand, weight, price, taste, description, image } = data
     const [cart, setCart] = useState(false);
     const { addItem, items, updateItemQuantity, cartTotal, emptyCart } = useCart();
 
@@ -127,8 +127,8 @@ export default function ProductDetails({ data }) {
                             <h1>
                                 Sabores: <span className='text-lg font-semibold text-white capitalize'>
                                     {
-                                        toast.map((item, index) => {
-                                            if (index === toast.length - 1) {
+                                        taste.map((item, index) => {
+                                            if (index === taste.length - 1) {
                                                 return item
                                             } else {
                                                 return `${item}, `
@@ -158,8 +158,12 @@ export async function getServerSideProps({ params: { id } }) {
         }
     }
 
-    const data = await res.json()
-
+    const product = await res.json()
+    const data = {
+        ...product,
+        id: id,
+    }
+    
     return {
         props: {
             data
