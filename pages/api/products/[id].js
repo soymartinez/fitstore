@@ -1,4 +1,4 @@
-import { dbConnect } from 'utils/moongose'
+import { dbConnect } from 'utils/mongoose'
 import Product from 'models/Product'
 
 dbConnect();

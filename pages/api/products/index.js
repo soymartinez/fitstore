@@ -1,5 +1,5 @@
 import Product from 'models/Product'
-import { dbConnect } from 'utils/moongose'
+import { dbConnect } from 'utils/mongoose'
 
 dbConnect();
 
