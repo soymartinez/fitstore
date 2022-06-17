@@ -81,7 +81,7 @@ export default function Navbar({ status }) {
                                             ? 'text-white' : ''}`}>
                                         <div className={`${router.asPath == '/profile'
                                             ? 'border-white rounded-full'
-                                            : 'border-none md:p-0 p-[2px]'} md:border-none border-2`}>
+                                            : 'border-none md:p-0 p-[2px]'} flex items-center md:border-none border-2`}>
                                             {
                                                 session
                                                     ? <Image src={session.user.image} className='rounded-full' width={40} height={40} alt={'profile'} />
