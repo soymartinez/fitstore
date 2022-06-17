@@ -1,13 +1,19 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { getSession } from 'next-auth/react'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Icon from './icon';
 
-export default function Navbar({ image, session }) {
+export default function Navbar({ status }) {
     const router = useRouter();
     const [scroll, setScroll] = useState(false);
+    const [session, setSession] = useState(null);
     useEffect(() => {
+        (async () => {
+            const session = await getSession()
+            setSession(session)
+        })()
         window.addEventListener('scroll', () => {
             if (window.scrollY > 0) {
                 setScroll(true);
@@ -33,7 +39,7 @@ export default function Navbar({ image, session }) {
                         </a>
                     </Link>
                     {
-                        session === 'loading' ?
+                        status === 'loading' ?
                             <div className='flex items-center ease-out duration-500'>
                                 <div className='mx-5 md:mx-10'>
                                     <h2 className='text-gray-700 bg-gray-700 animate-pulse rounded-full'>
@@ -50,7 +56,7 @@ export default function Navbar({ image, session }) {
                             : ''
                     }
                     {
-                        session === 'unauthenticated' ?
+                        status === 'unauthenticated' ?
                             <Link href={'/auth/signin'}>
                                 <h2 className={`cursor-pointer hover:text-white hover:animate-none animate-pulse
                                             ${router.asPath == '/auth/signin' ? 'text-white animate-none' : ''}`}>
@@ -60,7 +66,7 @@ export default function Navbar({ image, session }) {
                             : ''
                     }
                     {
-                        session === 'authenticated' ?
+                        status === 'authenticated' ?
                             <div className='flex items-center'>
                                 <Link href={'/orders'}>
                                     <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
@@ -77,9 +83,10 @@ export default function Navbar({ image, session }) {
                                             ? 'border-white rounded-full'
                                             : 'border-none md:p-0 p-[2px]'} md:border-none border-2`}>
                                             {
-                                                image
-                                                    ? <Image src={image} width={40} height={40} alt={'profile'} />
-                                                    : <Icon width={40} height={40} />
+                                                session
+                                                    ? <Image src={session.user.image} className='rounded-full' width={40} height={40} alt={'profile'} />
+                                                    : <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
+
                                             }
                                         </div>
                                         <span className='md:block hidden'>perfil</span>
