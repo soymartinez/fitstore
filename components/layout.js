@@ -12,9 +12,9 @@ export default function Layout({ title, children }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar session={status} />
+            <Navbar status={status} />
 
-            <main>
+            <main className='relative'>
                 {children}
             </main>
         </div>
