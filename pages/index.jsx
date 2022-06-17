@@ -63,13 +63,13 @@ export default function Home({ data }) {
           <h2 className='text-2xl font-semibold mb-4 text-[#3081ed]'>Lista de productos</h2>
           <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-700 rounded-md'>
             {
-              data.map(({ id, name, price, image, description }) => (
-                <article key={id} className='p-4 bg-[#222537] rounded-md'>
+              data.map(({ _id, brand, name, price, image }) => (
+                <article key={_id} className='p-4 bg-[#222537] rounded-md'>
                   <div className='w-[150px] h-[150px] relative'>
                     <Image src={image} layout='fill' alt={name}></Image>
                   </div>
                   <h3 className='subtitle text-2xl text-white mt-2 font-semibold'>{name}</h3>
-                  <h5>{description}</h5>
+                  <h5>{brand}</h5>
                   <h5 className='text-xl font-semibold'>$ {price}</h5>
                 </article>
               ))
