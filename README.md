@@ -1,34 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Logo](https://rvkcdmogfcqespfmcfhh.supabase.co/storage/v1/object/sign/images/banner.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYmFubmVyLnBuZyIsImlhdCI6MTY1OTMzODM3OSwiZXhwIjoxOTc0Njk4Mzc5fQ.V0WJg8Nxhpcwo8DDY8241pWdu9XnVZXGdlv9UuBNdrg)
 
-## Getting Started
+<p align="center">
 
-First, run the development server:
+  **Fitstore** is an online store that is dedicated to the commercialization of Nutritional-Sports Supplements where we guarantee an excellent quality of service, we have a wide variety of products of the highest quality.
+
+</p>
+
+<p align="center">
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/package-json/dependency-version/omgismartinez/fitstore/next?style=flat-square&labelColor=fff&color=000"
+            alt="Next.js"></a>
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/package-json/dependency-version/omgismartinez/fitstore/next-auth?style=flat-square&labelColor=1ac1e6&color=961ed8"
+            alt="Next-Auth"></a>
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/package-json/dependency-version/omgismartinez/fitstore/react?style=flat-square&labelColor=fff&color=5ed3f3"
+            alt="React"></a>
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/package-json/dependency-version/omgismartinez/fitstore/react-use-cart?style=flat-square&labelColor=fff&color=100f16"
+            alt="React-use-cart"></a>
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/package-json/dependency-version/omgismartinez/fitstore/stripe?style=flat-square&labelColor=fff&color=f63850"
+            alt="React-use-cart"></a>
+  <a href="https://github.com/omgismartinez/fitstore">
+        <img src="https://img.shields.io/github/repo-size/omgismartinez/fitstore?style=flat-square&labelColor=100f16&color=4577ea"
+            alt="Fitstore"></a>
+</p>
+
+## 🚀 Stack
+
+**Framework:** Next.js, React
+
+**Authentication:** NextAuth
+
+**Style:** TailwindCSS
+
+## Deployment
+
+[![deployment](https://img.shields.io/badge/fitstore-000?style=for-the-badge&logo=vercel&logoColor=white)](https://fitstore.vercel.app/)
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`NEXTAUTH_URL`
+`NEXTAUTH_SECRET`
+`GOOGLE_CLIENT_SECRET`
+`GOOGLE_CLIENT_ID`
+`GITHUB_CLIENT_SECRET`
+`GITHUB_CLIENT_ID`
+`STRIPE_SECRET_KEY`
+
+## 🌌 Features
+
+- Add to shopping cart
+- Mobile version
+- Fullscreen mode
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/omgismartinez/fitstore.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+  cd fitstore
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Install dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm install | yarn
+```
 
-## Learn More
+Start the server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm run dev | yarn dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[MIT](https://github.com/omgismartinez/fitstore/blob/main/LICENSE)
