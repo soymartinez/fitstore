@@ -27,6 +27,12 @@ export const authOptions = {
     pages: {
         signIn: '/auth/signin',
     },
+    callbacks: {
+        async session({ session, user }) {
+            session.user.role = user.role
+            return session  
+        }
+    }
 }
 
 export default NextAuth(authOptions)
