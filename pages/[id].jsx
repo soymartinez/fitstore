@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Layout from "components/layout"
 import Image from "next/image"
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { useCart } from 'react-use-cart'
 import { useState } from "react";
 import { AiFillCloseCircle, AiOutlineShopping } from "react-icons/ai"
 import { TbShoppingCartOff, TbShoppingCartPlus } from "react-icons/tb"
+import getStripe from 'lib/getstripe';
 
 export default function ProductDetails({ data }) {
     const { name, brand, weight, price, taste, description, image } = data
@@ -14,6 +16,20 @@ export default function ProductDetails({ data }) {
     const addCart = () => {
         addItem(data)
         setCart(true)
+    }
+
+    const redirectToCheckout = async () => {
+        const {
+            data: { id },
+        } = await axios.post('/api/checkout', {
+            items: Object.entries(items).map(([_, { id, quantity }]) => ({
+                price: 'price_1LBtYoJYhcdVbcJUrDkaJiUh',
+                quantity,
+            })),
+        })
+
+        const stripe = await getStripe()
+        await stripe.redirectToCheckout({ sessionId: 'price_1LBtYoJYhcdVbcJUrDkaJiUh' })
     }
     return (
         <Layout title={`${name}`}>
@@ -69,11 +85,18 @@ export default function ProductDetails({ data }) {
                     </button>
                     {
                         cartTotal > 0 ?
-                            <div className='flex justify-between items-center mx-4 md:mx-8 md:p-4 p-2 
-                                 rounded-md relative 
+                            <div className='flex justify-end items-center mx-4 md:mx-8 md:p-4 p-2 
+                                 rounded-md relative gap-4
                                 bg-white backdrop-blur-lg bg-opacity-10'>
-                                <span className='text-white font-semibold'>Total:</span>
-                                <span className='text-white font-semibold'>${cartTotal}</span>
+                                <span className='text-white font-bold'>
+                                    <span className='text-white font-extralight'>Total: </span> ${cartTotal}
+                                </span>
+                                <button className='bg-white text-black
+                                            hover:bg-opacity-80 transition-all
+                                            rounded-full font-bold px-4'
+                                    onClick={() => redirectToCheckout()}>
+                                        Comprar
+                                </button>
                             </div>
                             : null
                     }
@@ -163,7 +186,7 @@ export async function getServerSideProps({ params: { id } }) {
         ...product,
         id: id,
     }
-    
+
     return {
         props: {
             data
