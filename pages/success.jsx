@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useCart } from "react-use-cart"
+import useSWR from "swr";
 
 export default function Success() {
     const {
@@ -8,6 +10,7 @@ export default function Success() {
 
     const { emptyCart } = useCart()
 
+    const fetcher = (url) => fetch(url).then((r) => r.json())
     const { data, error } = useSWR(
         () => `/api/checkout/${session_id}`,
         fetcher
@@ -23,7 +26,7 @@ export default function Success() {
         <div>
             <div className='container xl:max-w-screen-xl mx-auto py-12 px-6 text-center'>
                 {
-                    error ? (
+                    error && data ? (
                         <div className='text-red-600'>
                             An error occurred while processing your order.
                         </div>
@@ -36,7 +39,7 @@ export default function Success() {
                                 Your order has been received and will be processed
                                 as soon as possible.
                             </p>
-                            <p className='text-lg'>
+                            {/* <p className='text-lg'>
                                 Your order number is: {data.order_id}
                             </p>
                             <p className='text-lg'>
@@ -56,7 +59,7 @@ export default function Success() {
                             </p>
                             <p className='text-lg'>
                                 {data.shipping_address.country}
-                            </p>
+                            </p> */}
                         </>
                     )
                 }
