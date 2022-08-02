@@ -57,15 +57,29 @@ model VerificationToken {
 
 // Products
 
-model Products {
-    id          String   @id @default(cuid())
-    name        String
-    brand       String
-    description String?
-    taste       String[]
-    price       Int
-    weight      Int?
-    image       String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @default(now())
+model Product {
+    id           String        @id @default(cuid())
+    name         String
+    subname      String?
+    brand        String
+    image        String?
+    descriptions Description[]
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @default(now())
+}
+
+model Description {
+    id            String   @id @default(cuid())
+    productId     String
+    info          String?
+    detail        String?
+    use           String?
+    price         Int
+    discountPrice Int?
+    weight        Int?
+    ingredients   String?
+    flavors       String[]
+    benefits      String[]
+
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
