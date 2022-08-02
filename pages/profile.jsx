@@ -1,19 +1,21 @@
-import Link from 'next/link';
-import { getSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { TiUserOutline } from 'react-icons/ti';
-import { BiLogOutCircle } from 'react-icons/bi';
+import Image from 'next/image'
+import Link from 'next/link'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { TiUserOutline } from 'react-icons/ti'
+import { BiLogOutCircle } from 'react-icons/bi'
+import { useState } from 'react'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from './api/auth/[...nextauth]'
 
-import Layout from '../components/layout';
-import Formbutton from 'components/formbutton';
-import Icon from 'components/icon';
-import Image from 'next/image';
-import { useState } from 'react';
+import Layout from '../components/layout'
+import Formbutton from 'components/formbutton'
+import Icon from 'components/icon'
 
 export default function Profile({ data }) {
-    const { user: { name, email, image } } = data;
-    const [imagen, setImagen] = useState(image);
-    const router = useRouter();
+    const { user: { name, email, image } } = data
+    const [imagen, setImagen] = useState(image)
+    const router = useRouter()
     return (
         <Layout title={'Profile'}>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
@@ -105,7 +107,7 @@ export default function Profile({ data }) {
 }
 
 export async function getServerSideProps(context) {
-    const data = await getSession(context)
+    const data = await unstable_getServerSession(context.req, context.res, authOptions)
 
     if (!data) return {
         redirect: {
