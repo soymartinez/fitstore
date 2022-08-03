@@ -77,8 +77,8 @@ model Description {
     price         Int
     discountPrice Int?
     weight        Int?
-    ingredients   String?
     flavors       String[]
+    ingredients   String[]
     benefits      String[]
 
     product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
