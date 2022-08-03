@@ -56,10 +56,10 @@ export default function Home({ data }) {
         <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
           scrollbar-thumb-slate-700 rounded-md pb-4'>
           {
-            data.map(({ _id, name, brand, price, image }) => (
-              <article key={_id} className='p-4 border border-solid border-slate-700 bg-[#222537] 
+            data.map(({ id, name, brand, image, descriptions: { price } }) => (
+              <article key={id} className='p-4 border border-solid border-slate-700 bg-[#222537] 
                   rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
-                <Link href={`/${_id}`}>
+                <Link href={`/${id}`}>
                   <div className='cursor-pointer'>
                     <div className='relative w-56'>
                       <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name}/>
