@@ -6,7 +6,9 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const products = await prisma.product.findMany()
+                const products = await prisma.product.findMany({
+                    include: { descriptions: true },
+                })
                 return res.status(200).json(products)
             } catch (error) {
                 return res.status(400).json({ msg: error.message })
@@ -19,11 +21,7 @@ export default async (req, res) => {
                         subname: body.subname,
                         brand: body.brand,
                         image: body.image,
-                        descriptions: {
-                            create: [
-                                { ...body.descriptions }
-                            ]
-                        }
+                        descriptions: { create: body.description }
                     }
                 })
                 return res.status(201).json(product)
