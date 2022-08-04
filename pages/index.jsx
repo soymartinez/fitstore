@@ -1,7 +1,7 @@
-import Logo from '../components/logo'
-import Button from '../components/button'
+import Logo from 'components/logo'
+import Button from 'components/button'
 import Image from 'next/image'
-import Layout from '../components/layout'
+import Layout from 'components/layout'
 import Link from 'next/link'
 
 export default function Home({ data }) {
@@ -22,7 +22,7 @@ export default function Home({ data }) {
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
           <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center pro-gainer-image">
             <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
-              <Image src={'/images/PRO.png'} layout='fill' className='' alt=""></Image>
+              <Image src={'/images/PRO.png'} layout='fill' alt="pro"></Image>
             </div>
           </div>
           <div className='mt-4 md:mt-0'>
@@ -46,7 +46,7 @@ export default function Home({ data }) {
               aumentar la cantidad que obtiene a través de
               una dieta equilibrada de alimentos.
             </p>
-            <Button />
+            <Button href={'/cl6dqqr9r0730ywie1v4tctpa'} />
           </div>
         </div>
       </section>
@@ -56,23 +56,29 @@ export default function Home({ data }) {
         <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
           scrollbar-thumb-slate-700 rounded-md pb-4'>
           {
-            data.map(({ id, name, brand, image, descriptions: { price } }) => (
-              <article key={id} className='p-4 border border-solid border-slate-700 bg-[#222537] 
-                  rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
-                <Link href={`/${id}`}>
-                  <div className='cursor-pointer'>
-                    <div className='relative w-56'>
-                      <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name}/>
-                    </div>
-                    <div className='mt-2'>
-                      <h3 className='subtitle text-xl text-white font-semibold'>{name}</h3>
-                      <h5>{brand}</h5>
-                      <h5 className='text-xl font-semibold py-1 text-white'>$ {price}</h5>
-                    </div>
-                  </div>
-                </Link>
-              </article>
-            ))
+            data.length > 0 && (
+              data.map(({ id, name, brand, image, descriptions: { price, discountPrice } }) => (
+                <article key={id} className='border border-solid border-slate-700 bg-[#222537] 
+                    rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
+                  <Link href={`/${id}`}>
+                    <a>
+                      <div className='p-4 cursor-pointer h-full'>
+                        <div className='relative w-56'>
+                          <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name} />
+                        </div>
+                        <div className='mt-2'>
+                          <h3 className='subtitle text-xl text-white font-semibold'>{name}</h3>
+                          <h5>{brand}</h5>
+                          <h5 className='text-xl font-semibold py-1 text-white'>
+                            $ {discountPrice ?? price} <span className='line-through text-red-500'>{discountPrice ? price : null}</span>
+                          </h5>
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                </article>
+              ))
+            ) || <p>No hay productos</p>
           }
         </div>
       </section>
