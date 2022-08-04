@@ -1,20 +1,21 @@
 import axios from 'axios'
-import Layout from "components/layout"
-import Image from "next/image"
-import Link from "next/link";
+import Layout from 'components/layout'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useCart } from 'react-use-cart'
-import { useState } from "react";
-import { AiFillCloseCircle, AiOutlineShopping } from "react-icons/ai"
-import { TbShoppingCartOff, TbShoppingCartPlus } from "react-icons/tb"
-import getStripe from 'lib/getstripe';
+import { useState } from 'react'
+import { AiFillCloseCircle, AiOutlineShopping } from 'react-icons/ai'
+import { TbShoppingCartOff, TbShoppingCartPlus } from 'react-icons/tb'
+import getStripe from 'lib/getstripe'
+import Description from 'components/description'
 
 export default function ProductDetails({ data }) {
-    const { name, brand, weight, price, taste, description, image } = data
+    const { name, brand, image, descriptions: { info, detail, weight, price, discountPrice, flavors } } = data
     const [cart, setCart] = useState(false);
     const { addItem, items, updateItemQuantity, cartTotal, emptyCart } = useCart();
 
     const addCart = () => {
-        addItem(data)
+        addItem({ ...data, price: discountPrice ?? price })
         setCart(true)
     }
 
@@ -51,7 +52,7 @@ export default function ProductDetails({ data }) {
                                     <article className={`flex justify-between gap-2 hover:scale-[0.99] transition-all`}
                                         key={item.id}>
                                         <Link href={`${item.id}`}>
-                                            <div className='flex gap-2 cursor-pointer'>
+                                            <div className='flex gap-2 cursor-pointer w-full'>
                                                 <Image src={item.image} className='rounded-md' width={80} height={80} />
                                                 <div className='w-40 md:w-72'>
                                                     <span className='block text-white font-semibold 
@@ -95,7 +96,7 @@ export default function ProductDetails({ data }) {
                                             hover:bg-opacity-80 transition-all
                                             rounded-full font-bold px-4'
                                     onClick={() => redirectToCheckout()}>
-                                        Comprar
+                                    Comprar
                                 </button>
                             </div>
                             : null
@@ -104,29 +105,31 @@ export default function ProductDetails({ data }) {
             </div>
             <div className={`pt-24 container lg:px-32 md:px-8 px-4`}>
                 <div className='grid gap-2 pb-4'>
-                    <article className='md:flex p-4 relative bg-[#222537] rounded-md border border-solid border-slate-700'>
-                        <div className={`md:w-2/3`}>
-                            <div className={`flex  ${cart ? 'justify-center w-full md:absolute' : 'justify-between relative'}`}>
-                                <h2 className={`font-semibold ${cart ? 'w-full' : ''}`}>
+                    <article className='md:grid grid-cols-2 p-4 relative bg-[#222537] rounded-md border border-solid border-slate-700'>
+                        <div className='h-min'>
+                            <div className={`flex justify-between ${!cart && 'relative'}`}>
+                                <h2 className={`font-semibold`}>
                                     {brand}
                                 </h2>
-                                <div className={`flex text-2xl ${cart ? 'w-28 md:w-36 fixed z-50' : 'w-[68px] relative'} 
+                                <div className={`absolute ${cart ? ' flex justify-center -mx-4 w-full' : 'right-0'}`}>
+                                    <div className={`flex text-2xl ${cart ? 'w-28 md:w-36 fixed z-50' : 'w-[68px] relative'} 
                                         justify-between transition-all`}>
-                                    <TbShoppingCartOff onClick={() => emptyCart()}
-                                        className={`hover:text-white cursor-pointer ${cart ? 'z-50 text-white' : 'hidden'}`} />
-                                    <AiOutlineShopping onClick={() => setCart(!cart)}
-                                        className={`hover:text-white cursor-pointer ${cart ? 'z-50 text-white' : ''}`} />
-                                    <div className={`relative hover:text-white cursor-pointer 
+                                        <TbShoppingCartOff onClick={() => emptyCart()}
+                                            className={`hover:text-white cursor-pointer ${cart ? 'z-50 text-white' : 'hidden'}`} />
+                                        <AiOutlineShopping onClick={() => setCart(!cart)}
+                                            className={`hover:text-white cursor-pointer ${cart ? 'z-50 text-white' : ''}`} />
+                                        <div className={`relative hover:text-white cursor-pointer 
                                         ${cart ? 'z-50 text-white' : ''}`} onClick={() => addCart()}>
-                                        <TbShoppingCartPlus />
-                                        {
-                                            items.length > 0 ?
-                                                <div>
-                                                    <span className='absolute right-0 top-0 w-3 h-3 bg-red-500 rounded-full opacity-80' />
-                                                    <span className='absolute right-0 top-0 w-3 h-3 bg-red-500 rounded-full animate-ping' />
-                                                </div>
-                                                : null
-                                        }
+                                            <TbShoppingCartPlus />
+                                            {
+                                                items.length > 0 ?
+                                                    <div>
+                                                        <span className='absolute right-0 top-0 w-3 h-3 bg-red-500 rounded-full opacity-80' />
+                                                        <span className='absolute right-0 top-0 w-3 h-3 bg-red-500 rounded-full animate-ping' />
+                                                    </div>
+                                                    : null
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -136,10 +139,10 @@ export default function ProductDetails({ data }) {
                                     width={800} height={800} layout='responsive' alt={name}></Image>
                             </div>
                         </div>
-                        <div className='py-2 sm:py-0 md:px-6 md:w-2/3'>
+                        <div className='py-2 sm:py-0 md:px-6'>
                             <h1>
                                 Precio: <span className='text-lg font-semibold text-white'>
-                                    ${price}
+                                    ${discountPrice ?? price} <span className='line-through text-red-500'>{discountPrice ? price : null}</span>
                                 </span>
                             </h1>
                             <h1>
@@ -150,8 +153,8 @@ export default function ProductDetails({ data }) {
                             <h1>
                                 Sabores: <span className='text-lg font-semibold text-white capitalize'>
                                     {
-                                        taste.map((item, index) => {
-                                            if (index === taste.length - 1) {
+                                        flavors.map((item, index) => {
+                                            if (index === flavors.length - 1) {
                                                 return item
                                             } else {
                                                 return `${item}, `
@@ -160,9 +163,16 @@ export default function ProductDetails({ data }) {
                                     }
                                 </span>
                             </h1>
-                            <p>
-                                Descripción: <span className='text-white'>{description}</span>
-                            </p>
+                            <h1>
+                                Descripción: <span className='text-white font-bold'>{name} </span>
+                                <span>
+                                    {info}
+                                    <p className='mt-2'>{detail}</p>
+                                </span>
+                            </h1>
+                        </div>
+                        <div className='grid-rows-1 col-span-2'>
+                            <Description product={data.descriptions} />
                         </div>
                     </article>
                 </div>
@@ -182,14 +192,10 @@ export async function getServerSideProps({ params: { id } }) {
     }
 
     const product = await res.json()
-    const data = {
-        ...product,
-        id: id,
-    }
 
     return {
         props: {
-            data
+            data: product
         }
     }
 }
