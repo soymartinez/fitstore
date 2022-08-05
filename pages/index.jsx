@@ -20,7 +20,7 @@ export default function Home({ data }) {
 
       <section className='container lg:px-32 md:px-8 px-4 flex flex-col items-start overflow-hidden'>
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
-          <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center pro-gainer-image">
+          <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center border border-[#2b2a30] pro-gainer-image">
             <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
               <Image src={'/images/PRO.png'} layout='fill' alt="pro"></Image>
             </div>
@@ -100,7 +100,6 @@ export default function Home({ data }) {
 
         .pro-gainer-image {
           background: linear-gradient(169.44deg, rgba(58, 129, 191, 0.08) 1.85%, rgba(65, 48, 90, 0.08) 98.72%);
-          backdrop-filter: blur(1110px);
         }
       `}</style>
     </Layout>
