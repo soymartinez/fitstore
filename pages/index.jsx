@@ -3,6 +3,7 @@ import Button from 'components/button'
 import Image from 'next/image'
 import Layout from 'components/layout'
 import Link from 'next/link'
+import Atropos from 'atropos/react'
 
 export default function Home({ data }) {
   return (
@@ -21,9 +22,11 @@ export default function Home({ data }) {
       <section className='container lg:px-32 md:px-8 px-4 flex flex-col items-start overflow-hidden'>
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
           <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center border border-[#2b2a30] pro-gainer-image">
-            <div className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
-              <Image src={'/images/PRO.png'} layout='fill' alt="pro"></Image>
-            </div>
+            <Atropos className='flex justify-center items-center w-full h-full'>
+              <div data-atropos-offset='-10' className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
+                <Image src={'/images/PRO.png'} layout='fill' alt="pro"></Image>
+              </div>
+            </Atropos>
           </div>
           <div className='mt-4 md:mt-0'>
             <h1 className='font-extrabold title text-5xl md:text-7xl lg:text-8xl'>
