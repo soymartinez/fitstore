@@ -8,7 +8,7 @@ import Atropos from 'atropos/react'
 export default function Home({ data }) {
   return (
     <Layout title={'Fitstore'}>
-      <header className='container lg:px-32 md:px-8 px-8 pt-36 pb-16 md:pb-24 md:pt-56 text-center flex flex-col items-center'>
+      <header className='container lg:px-32 md:px-8 px-8 pt-36 md:pt-56 text-center flex flex-col items-center'>
         <h1 className='title text-5xl md:text-7xl lg:text-8xl max-w-[820px] mb-10'>
           <span className='relative z-30 text-white'>Una mejor manera de regenerarse</span>
         </h1>
@@ -19,15 +19,15 @@ export default function Home({ data }) {
         <Logo />
       </header>
 
-      <section className='container lg:px-32 md:px-8 px-4 flex flex-col items-start overflow-hidden'>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-10">
-          <div className="w-full rounded-[35px] md:ml-14 md:h-full min-h-[350px] md:w-[500px] md:order-2 mb-4 md:mb-0 flex justify-center border border-[#2b2a30] pro-gainer-image">
-            <Atropos className='flex justify-center items-center w-full h-full'>
-              <div data-atropos-offset='-10' className="my-auto w-72 h-72 md:w-[450px] md:h-[450px] transition-all hover:scale-[1.02] relative">
-                <Image src={'/images/PRO.png'} layout='fill' alt="pro"></Image>
+      <section className='container lg:px-32 md:px-8 px-4 pt-16 md:pt-24 flex flex-col items-start overflow-hidden'>
+        <div className='grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-20'>
+          <Atropos shadow={false} highlight={false} className='atropos md:order-2 md:ml-14 w-full md:h-full min-h-[350px] md:w-[500px] mb-4 md:mb-0'>
+            <div data-atropos-offset='1' className='atropos-container w-full rounded-[35px] min-h-full flex justify-center border border-[#2b2a30] pro-gainer-image'>
+              <div data-atropos-offset='5' className='my-auto w-72 h-72 md:w-[450px] md:h-[450px] rounded-[35px] relative'>
+                <Image src={'/images/PRO.png'} className='shadow-2xl' layout='fill' alt='pro'></Image>
               </div>
-            </Atropos>
-          </div>
+            </div>
+          </Atropos>
           <div className='mt-4 md:mt-0'>
             <h1 className='font-extrabold title text-5xl md:text-7xl lg:text-8xl'>
               <span className='relative z-30 text-white'>PRO</span>
@@ -54,7 +54,7 @@ export default function Home({ data }) {
         </div>
       </section>
 
-      <section className='container lg:px-32 md:px-8 px-4 py-20'>
+      <section className='container lg:px-32 md:px-8 px-4 py-10'>
         <h2 className='text-2xl font-semibold mb-4 text-[#3081ed]'>Lista de productos</h2>
         <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
           scrollbar-thumb-slate-700 rounded-md pb-4'>
@@ -103,6 +103,20 @@ export default function Home({ data }) {
 
         .pro-gainer-image {
           background: linear-gradient(169.44deg, rgba(58, 129, 191, 0.08) 1.85%, rgba(65, 48, 90, 0.08) 98.72%);
+        }
+
+        .atropos {
+          position: relative;
+          width: 100%;
+        }
+
+        .atropos-container {
+          position: absolute;
+          weight: 100%;
+          z-index: 1;
+          transform-style: preserve-3d;
+          pointer-events: none;
+          max-width: none;
         }
       `}</style>
     </Layout>
