@@ -2,8 +2,8 @@ import Logo from 'components/logo'
 import Button from 'components/button'
 import Image from 'next/image'
 import Layout from 'components/layout'
-import Link from 'next/link'
 import Atropos from 'atropos/react'
+import Cards from 'components/cards'
 
 export default function Home({ data }) {
   return (
@@ -20,10 +20,10 @@ export default function Home({ data }) {
       </header>
 
       <section className='container lg:px-32 md:px-8 px-4 pt-16 md:pt-24 flex flex-col items-start overflow-hidden'>
-        <div className='grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-20'>
-          <Atropos shadow={false} highlight={false} className='atropos md:order-2 md:ml-14 w-full md:h-full min-h-[350px] md:w-[500px] mb-4 md:mb-0'>
-            <div data-atropos-offset='1' className='atropos-container w-full rounded-[35px] min-h-full flex justify-center border border-[#2b2a30] pro-gainer-image'>
-              <div data-atropos-offset='5' className='my-auto w-72 h-72 md:w-[450px] md:h-[450px] rounded-[35px] relative'>
+        <div className='grid grid-cols-1 md:grid-cols-2 md:grid mb-0 md:mb-20 -m-6 p-6'>
+          <Atropos rotateTouch={'scroll-y'} shadow={false} highlight={false} className='md:order-2 md:ml-14 w-full md:h-full min-h-[350px] md:w-[500px] mb-4 md:mb-0'>
+            <div data-atropos-offset='0' className='atropos-container w-full rounded-[35px] min-h-full flex justify-center border border-[#2b2a30] pro-gainer-image'>
+              <div data-atropos-offset='4' className='my-auto w-72 h-72 md:w-[450px] md:h-[450px] rounded-[35px] relative'>
                 <Image src={'/images/PRO.png'} className='shadow-2xl' layout='fill' alt='pro'></Image>
               </div>
             </div>
@@ -33,7 +33,7 @@ export default function Home({ data }) {
               <span className='relative z-30 text-white'>PRO</span>
             </h1>
             <h2 className='subtitle font-bold text-xl md:text-3xl'>HIGH-PROTEIN GAINER</h2>
-            <p className='font-normal text-xl md:text-xl'>
+            <p className='font-normal text-lg md:text-xl'>
               Aumentar de tamaño requiere un equilibrio
               entre entrenamiento pesado, descanso
               adecuado y nutrición de calidad. Debido a
@@ -55,35 +55,8 @@ export default function Home({ data }) {
       </section>
 
       <section className='container lg:px-32 md:px-8 px-4 py-10'>
-        <h2 className='text-2xl font-semibold mb-4 text-[#3081ed]'>Lista de productos</h2>
-        <div className='flex gap-2 overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
-          scrollbar-thumb-slate-700 rounded-md pb-4'>
-          {
-            data.length > 0 && (
-              data.map(({ id, name, brand, image, descriptions: { price, discountPrice } }) => (
-                <article key={id} className='border border-solid border-slate-700 bg-[#222537] 
-                    rounded-md transition-all hover:scale-[.98]  hover:bg-[#222537a2]'>
-                  <Link href={`/${id}`}>
-                    <a>
-                      <div className='p-4 cursor-pointer h-full'>
-                        <div className='relative w-56'>
-                          <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name} />
-                        </div>
-                        <div className='mt-2'>
-                          <h3 className='subtitle text-xl text-white font-semibold'>{name}</h3>
-                          <h5>{brand}</h5>
-                          <h5 className='text-xl font-semibold py-1 text-white'>
-                            $ {discountPrice ?? price} <span className='line-through text-red-500'>{discountPrice ? price : null}</span>
-                          </h5>
-                        </div>
-                      </div>
-                    </a>
-                  </Link>
-                </article>
-              ))
-            ) || <p>No hay productos</p>
-          }
-        </div>
+        <h2 className='text-2xl font-semibold mb-8 text-[#3081ed]'>Lista de productos</h2>
+        <Cards product={data} />
       </section>
 
       <style jsx>{`
