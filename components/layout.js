@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import Navbar from './navbar'
-import { useSession } from 'next-auth/react'
 
 export default function Layout({ title, children }) {
-    const { status } = useSession()
     return (
         <div>
             <Head>
@@ -12,7 +10,7 @@ export default function Layout({ title, children }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar status={status} />
+            <Navbar />
 
             <main className='relative'>
                 {children}
