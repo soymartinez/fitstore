@@ -16,7 +16,7 @@ export default function Pedidos({ data }) {
 
                 <section className='grid gap-2 pb-4'>
                     {
-                        data.orders.map(({ id, name, weight, price, toast, amount, image }) => (
+                        data.orders > 0 && data.orders.map(({ id, name, weight, price, toast, amount, image }) => (
                             <article key={id} className='flex gap-2 md:gap-6 p-2 md:px-5 md:py-2 bg-[#222537] 
                                     rounded-md border border-solid border-slate-700 transition-all hover:scale-[.98] hover:bg-[#222537a2]'>
                                 <div className='min-w-[144px]'>
@@ -61,7 +61,7 @@ export default function Pedidos({ data }) {
                                     }
                                 </div>
                             </article>
-                        ))
+                        )) || <h1 className='text-white text-center'>No hay pedidos</h1>
                     }
                 </section>
             </div>
