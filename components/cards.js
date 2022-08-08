@@ -17,7 +17,7 @@ export default function Cards({ product }) {
                                     <a>
                                         <div data-atropos-offset='4' className='p-4 cursor-pointer h-full'>
                                             <div data-atropos-offset='-4' className='relative w-full'>
-                                                <Image src={image} priority className='rounded-md' width={800} height={800} layout='responsive' alt={name} />
+                                                <Image src={image} className='rounded-md' width={800} height={800} layout='responsive' alt={name} />
                                             </div>
                                             <div className='mt-2 text-center md:text-start sm:text-lg md:text-xl'>
                                                 <h3 className='font-semibold subtitle text-white'>{name}</h3>
