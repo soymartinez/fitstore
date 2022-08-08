@@ -1,9 +1,4 @@
-import { randomColor } from 'styles/utils';
-import { useState, useEffect } from 'react';
-
 export default function Formbutton({ text }) {
-    const [color, setColor] = useState(randomColor());
-    useEffect(() => setColor(randomColor()), [])
     return (
         <>
             <button className='w-full relative text-center overflow-hidden rounded-lg'>
@@ -15,7 +10,7 @@ export default function Formbutton({ text }) {
             </button>
             <style jsx>{`
                 div {
-                    background: linear-gradient(135deg, rgba(151, 83, 225, 0.5) 0%, rgba(229, 229, 229, 0.5) 100%), ${color}
+                    background: linear-gradient(100deg, #3081ed 0%, #9553e0 65%)
                 }
             `}</style>
         </>
