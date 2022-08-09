@@ -75,6 +75,17 @@ export default function Navbar() {
                     {
                         status === 'authenticated' ?
                             <div className='flex items-center'>
+                                {
+                                    session && session.user.role === 'admin' &&
+                                    <Link href={'/admin'}>
+                                        <a>
+                                            <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white hover:animate-none
+                                                ${router.asPath == '/admin' ? 'text-white animate-none' : ''}`}>
+                                                admin
+                                            </h2>
+                                        </a>
+                                    </Link>
+                                }
                                 <Link href={'/orders'}>
                                     <a>
                                         <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
