@@ -5,11 +5,7 @@ module.exports = {
     "./components/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      animation: {
-        '.animate-ping': '1s cubic-bezier(0, 0, 0.2, 1) infinite',
-      }
-    },
+    extend: {},
     keyframes: {
       shimmer: {
         '100%': { transform: 'translateX(100%)' },
@@ -19,6 +15,10 @@ module.exports = {
           transform: 'scale(2)',
           opacity: '0'
         },
+      },
+      pulse: {
+        '0%, 100%': { opacity: '1' },
+        '50%': { opacity: '.5' }
       },
     },
   },
