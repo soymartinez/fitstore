@@ -76,30 +76,34 @@ export default function Navbar() {
                         status === 'authenticated' ?
                             <div className='flex items-center'>
                                 <Link href={'/orders'}>
-                                    <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
+                                    <a>
+                                        <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
                                             ${router.asPath == '/orders' ? 'text-white' : ''}`}>
-                                        pedidos
-                                    </h2>
+                                            pedidos
+                                        </h2>
+                                    </a>
                                 </Link>
                                 <Link href={'/profile'}>
-                                    <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
+                                    <a>
+                                        <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
                                             flex items-center hover:text-white ease-in
                                             ${router.asPath == '/profile'
-                                            ? 'text-white' : ''}`}>
-                                        <div className={`${router.asPath == '/profile'
-                                            ? 'border-white rounded-full'
-                                            : 'border-none md:p-0 p-[2px]'} flex items-center md:border-none border-2`}>
-                                            {
-                                                session
-                                                    ? <Image src={session.user.image} className='rounded-full' width={40} height={40} alt={'profile'} />
-                                                    :
-                                                    <Skeleton rounded='rounded-full'>
-                                                        <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
-                                                    </Skeleton>
-                                            }
-                                        </div>
-                                        <span className='md:block hidden'>perfil</span>
-                                    </h2>
+                                                ? 'text-white' : ''}`}>
+                                            <div className={`${router.asPath == '/profile'
+                                                ? 'border-white rounded-full'
+                                                : 'border-none md:p-0 p-[2px]'} flex items-center md:border-none border-2`}>
+                                                {
+                                                    session
+                                                        ? <Image src={session.user.image} className='rounded-full' width={40} height={40} alt={'profile'} />
+                                                        :
+                                                        <Skeleton rounded='rounded-full'>
+                                                            <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
+                                                        </Skeleton>
+                                                }
+                                            </div>
+                                            <span className='md:block hidden'>perfil</span>
+                                        </h2>
+                                    </a>
                                 </Link>
                             </div>
                             : ''
