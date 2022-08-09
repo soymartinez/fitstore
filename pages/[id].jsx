@@ -133,7 +133,7 @@ export default function ProductDetails({ data }) {
                                     </div>
                                 </div>
                             </div>
-                            <h3 className={`text-xl pb-2 text-white mt-2 font-semibold`}>{name}</h3>
+                            <h3 className={`text-xl pb-2 text-white mt-2 font-semibold md:font-bold`}>{name}</h3>
                             <div className='relative w-full sm:max-w-lg rounded-md'>
                                 <Image src={image} className='rounded-md transition-all duration-100 hover:scale-[1.02]'
                                     width={800} height={800} layout='responsive' alt={name}></Image>
