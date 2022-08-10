@@ -1,21 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getSession, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import { fetcher } from 'lib/fetcher'
 import Skeleton from './skeleton'
 
 export default function Navbar() {
     const router = useRouter()
     const [scroll, setScroll] = useState(false)
-    const [session, setSession] = useState(null)
     const { status } = useSession()
+
+    const { data } = useSWR('/api/auth/session', fetcher)
+
     useEffect(() => {
-        async function Session() {
-            const session = await getSession()
-            setSession(session)
-        }
-        Session()
         window.addEventListener('scroll', () => {
             if (window.scrollY > 0) {
                 setScroll(true)
@@ -23,7 +22,7 @@ export default function Navbar() {
                 setScroll(false)
             }
         })
-    }, [scroll])
+    }, [])
 
     return (
         <>
@@ -38,21 +37,21 @@ export default function Navbar() {
                         </a>
                     </Link>
                     {
-                        status === 'loading' ?
+                        status == 'loading' ?
                             <div className='flex items-center ease-out duration-500'>
                                 <div className='mx-5 md:mx-10'>
                                     <Skeleton rounded='rounded-full'>
-                                        <h2 className='text-gray-700 bg-gray-700 animate-pulse rounded-full'>
+                                        <h2 className='text-gray-700 bg-gray-700 rounded-full'>
                                             pedidos
                                         </h2>
                                     </Skeleton>
                                 </div>
                                 <h2 className='md:w-24 ml-5 md:ml-10 flex justify-between items-center'>
                                     <Skeleton rounded='rounded-full' background='bg-gray-700'>
-                                        <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
+                                        <div className='w-10 h-10 bg-gray-700 rounded-full' />
                                     </Skeleton>
                                     <Skeleton rounded='rounded-full'>
-                                        <div className='bg-gray-700 animate-pulse'>
+                                        <div className='bg-gray-700'>
                                             <span className='md:block hidden text-gray-700'>perfil</span>
                                         </div>
                                     </Skeleton>
@@ -76,7 +75,7 @@ export default function Navbar() {
                         status === 'authenticated' ?
                             <div className='flex items-center'>
                                 {
-                                    session && session.user.role === 'admin' &&
+                                    data && data.user.role === 'admin' &&
                                     <Link href={'/admin'}>
                                         <a>
                                             <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white hover:animate-none
@@ -103,14 +102,8 @@ export default function Navbar() {
                                             <div className={`${router.asPath == '/profile'
                                                 ? 'border-white rounded-full'
                                                 : 'border-none md:p-0 p-[2px]'} flex items-center md:border-none border-2`}>
-                                                {
-                                                    session
-                                                        ? <Image src={session.user.image} className='rounded-full' width={40} height={40} alt={'profile'} />
-                                                        :
-                                                        <Skeleton rounded='rounded-full'>
-                                                            <div className='w-10 h-10 bg-gray-700 animate-pulse rounded-full' />
-                                                        </Skeleton>
-                                                }
+                                                <Image src={data.user.image} blurDataURL='#1f1d2b' placeholder='blur'
+                                                    className='rounded-full' width={40} height={40} alt={'profile'} />
                                             </div>
                                             <span className='md:block hidden'>perfil</span>
                                         </h2>
