@@ -1,7 +1,8 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useCart } from "react-use-cart"
-import useSWR from "swr";
+import { fetcher } from 'lib/fetcher'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useCart } from 'react-use-cart'
+import useSWR from 'swr'
 
 export default function Success() {
     const {
@@ -10,7 +11,6 @@ export default function Success() {
 
     const { emptyCart } = useCart()
 
-    const fetcher = (url) => fetch(url).then((r) => r.json())
     const { data, error } = useSWR(
         () => `/api/checkout/${session_id}`,
         fetcher
