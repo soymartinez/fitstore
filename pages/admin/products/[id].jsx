@@ -24,11 +24,18 @@ export default function EditProduct({ product }) {
                                 <h1 className={`font-bold text-3xl text-white`}>
                                     Administrador
                                 </h1>
-                                <Link href={`/admin/products/edit/${product.id}`}>
-                                    <a className='bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
-                                        Editar
-                                    </a>
-                                </Link>
+                                <div className='flex gap-2'>
+                                    <Link href={`/admin`}>
+                                        <a className='text-white border transition-all rounded-full font-bold px-4'>
+                                            Cancelar
+                                        </a>
+                                    </Link>
+                                    <Link href={`/admin/products/edit/${product.id}`}>
+                                        <a className='bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
+                                            Editar
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
                             <section>
                                 <ProductView product={product} />
