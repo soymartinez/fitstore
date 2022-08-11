@@ -1,7 +1,7 @@
 import Cards from 'components/cards'
 import Layout from 'components/layout'
 import { unstable_getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
 
 export default function Admin({ products, brands }) {
     return (
-        <Layout title={'Admin'}>
+        <Layout title={'Administrador'}>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
                 <h1 className={`font-bold text-3xl text-white md:pb-7 my-4`}>
                     Administrador
@@ -40,7 +40,7 @@ export default function Admin({ products, brands }) {
                         Productos
                     </h2>
                     <div>
-                        <Cards key={products.id} product={products} />
+                        <Cards key={products.id} admin={true} product={products} />
                     </div>
                 </section>
             </div>
