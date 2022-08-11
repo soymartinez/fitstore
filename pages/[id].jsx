@@ -39,7 +39,7 @@ export default function ProductDetails({ data }) {
                     h-screen w-full absolute`}>
                 <div onClick={() => setCart(!cart)}
                     className={`${cart ? 'block' : 'hidden'}
-                                    absolute z-50 w-full h-full 
+                                    fixed z-50 w-full h-full 
                                     bg-black bg-opacity-70 backdrop-blur-sm`}>
                 </div>
                 <div className={`w-full lg:px-24 max-w-7xl fixed z-50 space-y-2`}>
