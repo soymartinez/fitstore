@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Atropos from 'atropos/react'
 
-export default function Cards({ product }) {
+export default function Cards({ product, admin }) {
     return (
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 
             overflow-x-scroll scroll scrollbar-thin scrollbar-track-transparent 
@@ -13,7 +13,7 @@ export default function Cards({ product }) {
                         <Atropos rotateTouch='scroll-y' shadow={false} highlight={false} key={id}>
                             <article data-atropos-offset='0' className='atropos-container w-full h-full border border-solid border-slate-700 bg-[#222537] 
                                                         rounded-md transition-all hover:scale-[.98] hover:bg-[#222537a2]'>
-                                <Link href={`/${id}`}>
+                                <Link href={`/${admin ? `admin/products/${id}`: id}`}>
                                     <a>
                                         <div data-atropos-offset='4' className='p-4 cursor-pointer h-full'>
                                             <div data-atropos-offset='-4' className='relative w-full'>
