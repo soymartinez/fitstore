@@ -26,8 +26,8 @@ export default function EditProduct({ product }) {
                                 </h1>
                                 <div className='flex gap-2'>
                                     <Link href={`/admin`}>
-                                        <a className='text-white border transition-all rounded-full font-bold px-4'>
-                                            Cancelar
+                                        <a className='text-white hover:opacity-80 border transition-all rounded-full font-bold px-4'>
+                                            Volver
                                         </a>
                                     </Link>
                                     <Link href={`/admin/products/edit/${product.id}`}>
