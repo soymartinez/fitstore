@@ -18,7 +18,7 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function EditProduct({ product }) {
-    const { name, subname, brand, descriptions, image } = product
+    const { id, name, subname, brand, descriptions, image } = product
 
     const [imageUrl, setImageUrl] = useState(image)
     const [flavors, setFlavors] = useState(descriptions.flavors)
@@ -33,8 +33,7 @@ export default function EditProduct({ product }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const { name, subname, brand, image, info, detail,
-            use, price, discountPrice, weight } = e.target
+        const { name, subname, brand, image, info, detail, use, price, discountPrice, weight } = e.target
         const data = {
             name: name.value,
             subname: subname.value,
@@ -44,22 +43,18 @@ export default function EditProduct({ product }) {
                 info: info.value,
                 detail: detail.value,
                 use: use.value,
-                price: price.value,
-                discountPrice: discountPrice.value,
-                weight: weight.value,
+                price: +price.value,
+                discountPrice: +discountPrice.value,
+                weight: +weight.value,
                 flavors: flavors,
                 ingredients: ingredients,
                 benefits: benefits,
             },
         }
 
-        await axios.put(`/api/products/${product.id}`, {
-            body: data,
-        }).then(() => {
-            push(`/admin/products/${id}`)
-        }).catch(() => {
-            console.log('error')
-        })
+        await axios.put(`/api/products/${id}`, data)
+            .then(() => push(`/admin/products/${id}`))
+            .catch((error) => console.log('error: ', error.message))
     }
 
     function handleFlavorsChange(e) {
