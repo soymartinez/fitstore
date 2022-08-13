@@ -1,6 +1,7 @@
 import Cards from 'components/cards'
 import Layout from 'components/layout'
 import { unstable_getServerSession } from 'next-auth'
+import Link from 'next/link'
 import { authOptions } from '../api/auth/[...nextauth]'
 
 export async function getServerSideProps(context) {
@@ -36,9 +37,16 @@ export default function Admin({ products, brands }) {
                     Administrador
                 </h1>
                 <section>
-                    <h2 className={`font-bold text-2xl text-white my-4`}>
-                        Productos
-                    </h2>
+                    <div className='flex justify-between items-center my-4'>
+                        <h2 className={`font-bold text-2xl text-white`}>
+                            Productos
+                        </h2>
+                        <Link href={`/admin/products/new`}>
+                            <a className='bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
+                                Nuevo producto
+                            </a>
+                        </Link>
+                    </div>
                     <div>
                         <Cards key={products.id} admin={true} product={products} />
                     </div>
