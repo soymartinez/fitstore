@@ -21,7 +21,7 @@ export default function ProductView({ product }) {
             <div className='py-2 sm:py-0 md:px-6'>
                 <h1>
                     Precio: <span className='text-lg font-semibold text-white'>
-                        ${discountPrice ?? price} <span className='line-through text-red-500'>{discountPrice ? price : null}</span>
+                        ${discountPrice != 0 ? discountPrice : price} <span className='line-through text-red-500'>{discountPrice != 0 ? price : null}</span>
                     </span>
                 </h1>
                 <h1>
