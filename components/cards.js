@@ -23,7 +23,7 @@ export default function Cards({ product, admin }) {
                                                 <h3 className='font-semibold subtitle text-white'>{name}</h3>
                                                 <h5 className='text-sm sm:text-base'>{brand}</h5>
                                                 <h5 className='font-semibold py-1 text-white'>
-                                                    $ {discountPrice ?? price} <span className='line-through text-red-500'>{discountPrice ? price : null}</span>
+                                                    $ {discountPrice != 0 ? discountPrice : price} <span className='line-through text-red-500'>{discountPrice != 0 ? price : null}</span>
                                                 </h5>
                                             </div>
                                         </div>
