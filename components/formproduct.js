@@ -291,7 +291,7 @@ export default function FormProduct({ product }) {
                                             name={'ingredient'}
                                             defaultValue={ingredient}
                                             type={'text'}
-                                            rows={3}
+                                            rows={1}
                                             autoComplete='off'
                                             onChange={(e) => autoResize(e)}
                                             className={style.input} />
