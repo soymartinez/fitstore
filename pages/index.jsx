@@ -16,7 +16,7 @@ export default function Home({ data }) {
           Aumenta tu rendimiento deportivo con los mejores sumplementos para deportistas
         </p>
 
-        <Logo />
+        <Logo className={`w-36 h-36 lg:w-52 lg:h-52`} />
       </header>
 
       <section className='container lg:px-32 md:px-8 px-4 pt-16 md:pt-24 flex flex-col items-start overflow-hidden'>
