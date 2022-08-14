@@ -1,10 +1,14 @@
 import axios from 'axios'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { fetcher } from 'lib/fetcher'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { AiFillPlusCircle } from 'react-icons/ai'
 
 export default function FormProduct({ product }) {
+    const { data } = useSWR(`/api/brands`, fetcher)
+
     const [imageUrl, setImageUrl] = useState(product ? product.image : '')
     const [flavors, setFlavors] = useState(product ? product.descriptions.flavors : [])
     const [ingredients, setIngredients] = useState(product ? product.descriptions.ingredients : [])
@@ -122,14 +126,13 @@ export default function FormProduct({ product }) {
 
                 <div>
                     <label className={style.label}>{'Marca'}</label>
-                    <input
-                        name={'brand'}
-                        defaultValue={product ? product.brand : ''}
-                        placeholder={'Marca del producto'}
-                        required={true}
-                        type={'text'}
-                        autoComplete='off'
-                        className={style.input} />
+                    <select name={'brand'} className={style.input}>
+                        {data && data.map(({ id, name }) => (
+                            <option key={id}>
+                                {name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className='flex flex-col gap-2'>
