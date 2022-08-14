@@ -1,4 +1,6 @@
-![Logo](https://rvkcdmogfcqespfmcfhh.supabase.co/storage/v1/object/sign/images/banner.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYmFubmVyLnBuZyIsImlhdCI6MTY1OTMzODM3OSwiZXhwIjoxOTc0Njk4Mzc5fQ.V0WJg8Nxhpcwo8DDY8241pWdu9XnVZXGdlv9UuBNdrg)
+<a href="https://fitstore.vercel.app">
+  <img src="https://user-images.githubusercontent.com/72507996/184509288-6793b8c9-ac69-42bf-a733-6252a5803f68.png" />
+</a>
 
 <p align="center">
 
