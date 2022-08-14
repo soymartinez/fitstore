@@ -146,7 +146,6 @@ export default function FormProduct({ product }) {
                         required={true}
                         type={'url'}
                         autoComplete='off'
-                        onClick={(e) => autoResize(e)}
                         onChange={(e) => setImageUrl(e.target.value)}
                         className={style.input} />
                 </div>
@@ -158,9 +157,9 @@ export default function FormProduct({ product }) {
                         defaultValue={product ? product.descriptions.info : ''}
                         placeholder={`¿Qué es?`}
                         required={true}
-                        rows={3}
+                        rows={1}
                         autoComplete='off'
-                        onClick={(e) => autoResize(e)}
+                        onChange={(e) => autoResize(e)}
                         className={style.input} />
                 </div>
 
@@ -171,9 +170,9 @@ export default function FormProduct({ product }) {
                         defaultValue={product ? product.descriptions.detail : ''}
                         placeholder={`¿Qué contiene? ¿Cómo se usa? etc.`}
                         required={true}
-                        rows={5}
+                        rows={1}
                         autoComplete='off'
-                        onClick={(e) => autoResize(e)}
+                        onChange={(e) => autoResize(e)}
                         className={style.input} />
                 </div>
 
@@ -184,9 +183,9 @@ export default function FormProduct({ product }) {
                         defaultValue={product ? product.descriptions.use : ''}
                         placeholder={`¿Cómo se usa?`}
                         required={true}
-                        rows={5}
+                        rows={1}
                         autoComplete='off'
-                        onClick={(e) => autoResize(e)}
+                        onChange={(e) => autoResize(e)}
                         className={style.input} />
                 </div>
 
@@ -253,7 +252,7 @@ export default function FormProduct({ product }) {
                                             type={'text'}
                                             rows={1}
                                             autoComplete='off'
-                                            onClick={(e) => autoResize(e)}
+                                            onChange={(e) => autoResize(e)}
                                             className={style.input} />
                                         <button onClick={() => setFlavors([...flavors.slice(0, index), ...flavors.slice(index + 1)])}
                                             type={'button'} className='text-white text-3xl rotate-45 hover:scale-105'>
@@ -294,7 +293,7 @@ export default function FormProduct({ product }) {
                                             type={'text'}
                                             rows={3}
                                             autoComplete='off'
-                                            onClick={(e) => autoResize(e)}
+                                            onChange={(e) => autoResize(e)}
                                             className={style.input} />
                                         <button onClick={() => setIngredients([...ingredients.slice(0, index), ...ingredients.slice(index + 1)])}
                                             type={'button'} className='text-white text-3xl rotate-45 hover:scale-105'>
@@ -335,7 +334,7 @@ export default function FormProduct({ product }) {
                                             type={'text'}
                                             rows={1}
                                             autoComplete='off'
-                                            onClick={(e) => autoResize(e)}
+                                            onChange={(e) => autoResize(e)}
                                             className={style.input} />
                                         <button onClick={() => setBenefits([...benefits.slice(0, index), ...benefits.slice(index + 1)])}
                                             type={'button'} className='text-white text-3xl rotate-45 hover:scale-105'>
