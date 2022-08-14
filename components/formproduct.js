@@ -47,7 +47,7 @@ export default function FormProduct({ product }) {
                 .catch((error) => console.log('error: ', error.message))
         } else {
             await axios.post('/api/products', data)
-                .then(() => push('/admin/products'))
+                .then((product) => push(`/admin/products/${product.data.id}`))
                 .catch((error) => console.log('error: ', error.message))
         }
     }
