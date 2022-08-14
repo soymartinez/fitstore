@@ -139,17 +139,15 @@ export default function FormProduct({ product }) {
                     <label className={style.label}>{'Imagen'}</label>
                     <Image src={imageUrl} alt={product ? product.name : ''} layout={'fixed'} width={140} height={140}
                         onError={(e) => e.target.onerror = null} />
-                    <textarea
+                    <input
                         name={'image'}
                         defaultValue={product ? product.image : ''}
                         placeholder={'URL de la imagen'}
                         required={true}
-                        rows={3}
+                        type={'url'}
                         autoComplete='off'
-                        onClick={(e) => {
-                            autoResize(e)
-                            setImageUrl(e.target.value)
-                        }}
+                        onClick={(e) => autoResize(e)}
+                        onChange={(e) => setImageUrl(e.target.value)}
                         className={style.input} />
                 </div>
 
