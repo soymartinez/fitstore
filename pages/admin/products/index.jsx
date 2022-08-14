@@ -29,9 +29,9 @@ export default function AdminProducts({ products }) {
 
     function Space() {
         return (
-            <svg data-testid="geist-icon" fill="none" height="32" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" width="32" className='text-blue-500/40'>
-                <path d="M16.88 3.549L7.12 20.451"></path>
+            <svg fill={'none'} height={'32'} shapeRendering={'geometricPrecision'} stroke={'currentColor'} strokeLinecap={'round'}
+                strokeLinejoin={'round'} strokeWidth={'1'} viewBox={'0 0 24 24'} width={'32'} className='text-blue-500/40'>
+                <path d='M16.88 3.549L7.12 20.451'></path>
             </svg>
         )
     }
