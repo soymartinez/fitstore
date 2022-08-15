@@ -1,7 +1,10 @@
+import axios from 'axios'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import Layout from 'components/layout'
 import ProductView from 'components/productview'
 import { fetcher } from 'lib/fetcher'
-import Link from 'next/link'
 
 export async function getServerSideProps({ params }) {
     const { id } = params
@@ -14,6 +17,14 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function EditProduct({ product }) {
+    const { push } = useRouter()
+
+    async function handleDelete() {
+        await axios.delete(`/api/products/${product.id}`)
+            .then(() => push('/admin/products'))
+            .catch((error) => console.log('error: ', error.message))
+    }
+
     return (
         <Layout title={'Administrador'}>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
@@ -30,6 +41,10 @@ export default function EditProduct({ product }) {
                                             Volver
                                         </a>
                                     </Link>
+                                    <button onClick={handleDelete}
+                                        className='bg-red-500 text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
+                                        Eliminar
+                                    </button>
                                     <Link href={`/admin/products/edit/${product.id}`}>
                                         <a className='bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
                                             Editar
