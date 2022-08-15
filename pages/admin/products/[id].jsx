@@ -20,13 +20,31 @@ export default function EditProduct({ product }) {
     const { push } = useRouter()
 
     async function handleDelete() {
-        await axios.delete(`/api/products/${product.id}`)
-            .then(() => push('/admin/products'))
-            .catch((error) => console.log('error: ', error.message))
+        const Toast = (await import('wc-toast')).toast
+        Toast.promise(
+            await axios.delete(`/api/products/${product.id}`),
+            {
+                loading: 'eliminando',
+                success: `${product.name} eliminado`,
+                error: 'algo salio mal',
+            },
+            {
+                theme: {
+                    type: 'custom',
+                    style: {
+                        background: '#222537',
+                        color: '#fff',
+                        stroke: '#fff',
+                    }
+                },
+            },
+        )
+        push('/admin/products')
     }
 
     return (
         <Layout title={'Administrador'}>
+            <wc-toast></wc-toast>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
                 {
                     product && (
