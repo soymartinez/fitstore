@@ -88,7 +88,7 @@ export default function FormProduct({ product }) {
                 <div className='flex gap-2'>
                     <button
                         type={'button'}
-                        onClick={() => push(product ? `/admin/products/${product.id}` : '/admin')}
+                        onClick={() => push(product ? `/admin/products/${product.id}` : '/admin/products')}
                         className={`text-white hover:opacity-80 border transition-all rounded-full font-bold px-4`}>
                         Cancelar
                     </button>
