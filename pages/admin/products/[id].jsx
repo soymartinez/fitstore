@@ -49,7 +49,7 @@ export default function EditProduct({ product }) {
                 {
                     product && (
                         <div>
-                            <div className='flex justify-between items-center md:pb-7 my-4'>
+                            <div className='flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center gap-4 md:pb-7 my-4'>
                                 <h1 className={`font-bold text-3xl text-white`}>
                                     Administrador
                                 </h1>
