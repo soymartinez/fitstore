@@ -128,7 +128,7 @@ export default function FormProduct({ product }) {
                     <label className={style.label}>{'Marca'}</label>
                     <select name={'brand'} className={style.input}>
                         {data && data.map(({ id, name }) => (
-                            <option key={id}>
+                            <option selected={name === product.brand} key={id}>
                                 {name}
                             </option>
                         ))}
