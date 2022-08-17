@@ -41,14 +41,63 @@ export default function FormProduct({ product }) {
             },
         }
 
+        const Toast = (await import('wc-toast')).toast
         if (product) {
-            await axios.put(`/api/products/${product.id}`, data)
-                .then(() => push(`/admin/products/${product.id}`))
-                .catch((error) => console.log('error: ', error.message))
+            Toast.promise(
+                new Promise(async (resolve, reject) => {
+                    try {
+                        const res = await axios.put(`/api/products/${product.id}`, data)
+                            .then(() => push(`/admin/products/${product.id}`))
+                            .catch((error) => console.log('error: ', error.message))
+                        resolve(res.data)
+                    } catch (error) {
+                        reject(error.response.data)
+                    }
+                }),
+                {
+                    loading: 'actualizando',
+                    success: 'producto actualizado',
+                    error: 'algo salio mal',
+                },
+                {
+                    theme: {
+                        type: 'custom',
+                        style: {
+                            background: '#222537',
+                            color: '#fff',
+                            stroke: '#fff',
+                        }
+                    },
+                },
+            )
         } else {
-            await axios.post('/api/products', data)
-                .then((product) => push(`/admin/products/${product.data.id}`))
-                .catch((error) => console.log('error: ', error.message))
+            Toast.promise(
+                new Promise(async (resolve, reject) => {
+                    try {
+                        const res = await axios.post('/api/products', data)
+                            .then((product) => push(`/admin/products/${product.data.id}`))
+                            .catch((error) => console.log('error: ', error.message))
+                        resolve(res.data)
+                    } catch (error) {
+                        reject(error.response.data)
+                    }
+                }),
+                {
+                    loading: 'guardando',
+                    success: 'producto guardado',
+                    error: 'algo salio mal',
+                },
+                {
+                    theme: {
+                        type: 'custom',
+                        style: {
+                            background: '#222537',
+                            color: '#fff',
+                            stroke: '#fff',
+                        }
+                    },
+                },
+            )
         }
     }
 
@@ -83,6 +132,7 @@ export default function FormProduct({ product }) {
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
+            <wc-toast></wc-toast>
             <div className='flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center gap-4 md:pb-7 my-4'>
                 <h1 className='font-bold text-3xl text-white'>{product ? 'Editar producto' : 'Nuevo producto'}</h1>
                 <div className='flex gap-2'>
