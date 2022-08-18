@@ -5,9 +5,16 @@ import Atropos from 'atropos/react'
 
 import Layout from 'components/layout'
 
-export async function getServerSideProps(context) {
-    const session = await unstable_getServerSession(context.req, context.res, authOptions)
-    if (session.user.role !== 'admin') {
+export async function getServerSideProps({ req, res }) {
+    const session = await unstable_getServerSession(req, res, authOptions)
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false
+            }
+        }
+    } else if (session.user.role !== 'admin') {
         return {
             redirect: {
                 destination: '/',
