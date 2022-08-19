@@ -145,6 +145,21 @@ export default function Navbar() {
                     background-clip: text;
                     text-fill-color: transparent;
                 }
+
+                .name {
+                    -webkit-mask-image: linear-gradient(
+                        60deg,
+                        black 25%,
+                        rgba(0, 0, 0, 0.2) 50%,
+                        black 75%
+                    );
+                    -webkit-mask-size: 400%;
+                    -webkit-mask-position: 0%;
+                }
+                .name:hover {
+                    -webkit-mask-position: 100%;
+                    transition: mask-position 1s ease, -webkit-mask-position 1s ease;
+                }
             `}</style>
         </>
     )
