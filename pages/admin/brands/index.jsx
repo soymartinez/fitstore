@@ -66,7 +66,8 @@ export default function AdminBrands({ brands }) {
                         <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                             {brands.map(brand => (
                                 <Atropos key={brand.id} rotateTouch='scroll-y' shadow={false} highlight={false}>
-                                    <article data-atropos-offset='0' className='bg-black/50 rounded-lg shadow-lg p-4'>
+                                    <article data-atropos-offset='0' className='w-full h-full border shadow-lg p-4 border-slate-700 bg-[#222537] 
+                                                        rounded-md transition-all hover:scale-[.98] hover:bg-[#222537a2]'>
                                         <div className='flex justify-center items-center'>
                                             <Image src={brand.image} alt={brand.name} width={200} height={200} objectFit="contain" />
                                         </div>
