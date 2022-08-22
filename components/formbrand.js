@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -88,12 +89,11 @@ export default function FormBrand({ brand }) {
       <div className='flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center gap-4 md:pb-7 my-4'>
         <h1 className='font-bold text-3xl text-white'>{brand.name ? 'Editar Marca' : 'Nueva Marca'}</h1>
         <div className='flex gap-2'>
-          <button
-            type={'button'}
-            onClick={() => push(`/admin/brands`)}
-            className={`text-white hover:opacity-80 border transition-all rounded-full font-bold px-4`}>
-            Cancelar
-          </button>
+          <Link href='/admin/brands'>
+            <a className={`text-white hover:opacity-80 border transition-all rounded-full font-bold px-4`}>
+              Cancelar
+            </a>
+          </Link>
           <button
             type={'submit'}
             className={`bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4`}>
