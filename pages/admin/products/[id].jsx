@@ -38,10 +38,21 @@ export async function getServerSideProps({ params, req, res }) {
 export default function EditProduct({ product }) {
     const { push } = useRouter()
 
-    async function handleDelete() {
+    async function handleDelete(e) {
+        e.preventDefault()
+
         const Toast = (await import('wc-toast')).toast
         Toast.promise(
-            await axios.delete(`/api/products/${product.id}`),
+            new Promise(async (resolve, reject) => {
+                try {
+                    const res = await axios.delete(`/api/products/${product.id}`)
+                        .then(() => push('/admin/products'))
+                        .catch((error) => console.log('error: ', error.message))
+                    resolve(res.data)
+                } catch (error) {
+                    reject(error.data)
+                }
+            }),
             {
                 loading: 'eliminando',
                 success: `${product.name} eliminado`,
@@ -58,7 +69,6 @@ export default function EditProduct({ product }) {
                 },
             },
         )
-        push('/admin/products')
     }
 
     return (
@@ -78,7 +88,7 @@ export default function EditProduct({ product }) {
                                             Volver
                                         </a>
                                     </Link>
-                                    <button onClick={handleDelete}
+                                    <button onClick={(e) => handleDelete(e)}
                                         className='bg-red-500 text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
                                         Eliminar
                                     </button>
