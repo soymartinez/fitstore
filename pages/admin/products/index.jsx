@@ -45,6 +45,7 @@ export default function AdminProducts({ products }) {
 
     return (
         <Layout title={'Productos'}>
+            <wc-toast></wc-toast>
             <div className='pt-24 container lg:px-32 md:px-8 px-4'>
                 <h1 className={`font-bold text-3xl text-white md:pb-7 my-4`}>
                     Productos
