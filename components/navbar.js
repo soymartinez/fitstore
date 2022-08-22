@@ -38,24 +38,24 @@ export default function Navbar() {
                     </Link>
                     {
                         status == 'loading' ?
-                            <div className='flex items-center ease-out duration-500'>
-                                <div className='mx-5 md:mx-10'>
+                            <div className='flex items-center justify-center gap-8 sm:gap-10 md:gap-20 transition-all'>
+                                <div>
                                     <Skeleton rounded='rounded-full'>
                                         <h2 className='text-gray-700 bg-gray-700 rounded-full'>
                                             pedidos
                                         </h2>
                                     </Skeleton>
                                 </div>
-                                <h2 className='md:w-24 ml-5 md:ml-10 flex justify-between items-center'>
+                                <div className='md:w-24 flex justify-between items-center'>
                                     <Skeleton rounded='rounded-full' background='bg-gray-700'>
-                                        <div className='w-10 h-10 bg-gray-700 rounded-full' />
+                                        <div className='w-10 h-10 m-[2px] md:m-0 bg-gray-700 rounded-full' />
                                     </Skeleton>
                                     <Skeleton rounded='rounded-full'>
                                         <div className='bg-gray-700'>
                                             <span className='md:block hidden text-gray-700'>perfil</span>
                                         </div>
                                     </Skeleton>
-                                </h2>
+                                </div>
                             </div>
                             : ''
                     }
@@ -73,12 +73,12 @@ export default function Navbar() {
                     }
                     {
                         status === 'authenticated' ?
-                            <div className='flex items-center'>
+                            <div className='flex items-center gap-8 sm:gap-10 md:gap-20 transition-all'>
                                 {
                                     data && data.user.role === 'admin' &&
                                     <Link href={'/admin'}>
                                         <a>
-                                            <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white hover:animate-none
+                                            <h2 className={`cursor-pointer hover:text-white hover:animate-none
                                                 ${router.asPath == '/admin' ? 'text-white animate-none' : ''}`}>
                                                 admin
                                             </h2>
@@ -87,7 +87,7 @@ export default function Navbar() {
                                 }
                                 <Link href={'/orders'}>
                                     <a>
-                                        <h2 className={`cursor-pointer mx-5 md:mx-10 hover:text-white
+                                        <h2 className={`cursor-pointer hover:text-white
                                             ${router.asPath == '/orders' ? 'text-white' : ''}`}>
                                             pedidos
                                         </h2>
@@ -95,7 +95,7 @@ export default function Navbar() {
                                 </Link>
                                 <Link href={'/profile'}>
                                     <a>
-                                        <h2 className={`cursor-pointer md:w-24 justify-between ml-5 md:ml-10 
+                                        <h2 className={`cursor-pointer md:w-24 justify-between
                                             flex items-center hover:text-white ease-in
                                             ${router.asPath == '/profile'
                                                 ? 'text-white' : ''}`}>
