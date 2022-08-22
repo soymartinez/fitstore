@@ -1,6 +1,9 @@
-import Layout from "components/layout"
-import { getProviders, getSession, signIn } from "next-auth/react"
-import { AiFillGithub, AiOutlineGoogle, AiFillFacebook } from "react-icons/ai"
+import { getProviders, signIn } from 'next-auth/react'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { AiFillGithub, AiOutlineGoogle, AiFillFacebook } from 'react-icons/ai'
+
+import Layout from 'components/layout'
 
 export default function SignIn({ providers }) {
     return (
@@ -45,8 +48,8 @@ export default function SignIn({ providers }) {
     )
 }
 
-export async function getServerSideProps(context) {
-    const data = await getSession(context)
+export async function getServerSideProps({ req, res }) {
+    const data = await unstable_getServerSession(req, res, authOptions)
 
     if (data) return {
         redirect: {
