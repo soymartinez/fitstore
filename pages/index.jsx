@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Layout from 'components/layout'
 import Atropos from 'atropos/react'
 import Cards from 'components/cards'
+import DirectLink from 'components/directlink'
 
 export default function Home({ data }) {
   return (
@@ -54,8 +55,10 @@ export default function Home({ data }) {
         </div>
       </section>
 
-      <section className='container lg:px-32 md:px-8 px-4 py-10'>
-        <h2 className='text-2xl font-semibold mb-8 text-[#3081ed]'>Lista de productos</h2>
+      <section id='productlist' className='container lg:px-32 md:px-8 px-4 py-10'>
+        <DirectLink href={'productlist'} >
+          Lista de productos
+        </DirectLink>
         <Cards product={data} />
       </section>
 
