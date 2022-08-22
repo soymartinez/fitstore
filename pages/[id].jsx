@@ -186,7 +186,7 @@ export async function getServerSideProps({ params: { id } }) {
 
     if (!res.ok) return {
         redirect: {
-            destination: '/auth/signin',
+            destination: '/',
             permanent: false
         }
     }
