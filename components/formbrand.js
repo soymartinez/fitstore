@@ -77,6 +77,39 @@ export default function FormBrand({ brand }) {
     }
   }
 
+  const handleDelete = async (e) => {
+    e.preventDefault()
+
+    const Toast = (await import('wc-toast')).toast
+    Toast.promise(
+      new Promise(async (resolve, reject) => {
+        try {
+          const res = await axios.delete(`/api/brands/${brand.id}`)
+            .then(() => push(`/admin/brands`))
+            .catch((error) => console.log('error: ', error.message))
+          resolve(res.data)
+        } catch (error) {
+          reject(error.data)
+        }
+      }),
+      {
+        loading: 'eliminando',
+        success: 'marca eliminada',
+        error: 'algo salio mal',
+      },
+      {
+        theme: {
+          type: 'custom',
+          style: {
+            background: '#222537',
+            color: '#fff',
+            stroke: '#fff',
+          }
+        },
+      },
+    )
+  }
+
   const style = {
     label: 'block mb-1.5 text-sm font-medium',
     input: `bg-[#222537] border text-sm outline-none rounded-lg block w-full p-2.5 hover:border-violet-500
@@ -94,6 +127,11 @@ export default function FormBrand({ brand }) {
               Cancelar
             </a>
           </Link>
+          {brand.name && (
+            <button onClick={handleDelete}
+              className='bg-red-500 text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4'>
+              Eliminar
+            </button>)}
           <button
             type={'submit'}
             className={`bg-white text-black hover:bg-opacity-80 transition-all rounded-full font-bold px-4`}>
