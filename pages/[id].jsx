@@ -52,17 +52,19 @@ export default function ProductDetails({ data }) {
                                     <article className={`flex justify-between gap-2 hover:scale-[0.99] transition-all`}
                                         key={item.id}>
                                         <Link href={`${item.id}`}>
-                                            <div className='flex gap-2 cursor-pointer w-full'>
-                                                <Image src={item.image} className='rounded-md' width={80} height={80} />
-                                                <div className='w-40 md:w-72'>
-                                                    <span className='block text-white font-semibold 
+                                            <a>
+                                                <div className='flex gap-2 cursor-pointer w-full'>
+                                                    <Image src={item.image} className='rounded-md' width={80} height={80} />
+                                                    <div className='w-40 md:w-72'>
+                                                        <span className='block text-white font-semibold 
                                                     whitespace-nowrap overflow-hidden text-ellipsis'>
-                                                        {item.name}
-                                                    </span>
-                                                    <span className='block font-semibold'>{item.brand}</span>
-                                                    <span className='text-white font-semibold'>${item.price}</span>
+                                                            {item.name}
+                                                        </span>
+                                                        <span className='block font-semibold'>{item.brand}</span>
+                                                        <span className='text-white font-semibold'>${item.price}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </Link>
                                         <div className='flex gap-4 items-center justify-end'>
                                             <button className='bg-white rounded-full bg-opacity-10 
