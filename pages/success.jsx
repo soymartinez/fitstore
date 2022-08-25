@@ -5,19 +5,15 @@ import { useCart } from 'react-use-cart'
 import useSWR from 'swr'
 
 export default function Success() {
-    const {
-        query: { session_id },
-    } = useRouter()
-
+    const { query: { session_id } } = useRouter()
     const { emptyCart } = useCart()
-
-    const { data, error } = useSWR(
-        () => `/api/checkout/${session_id}`,
+    const { data, error } = useSWR(() => `/api/checkout/${session_id}`,
         fetcher
     )
 
     useEffect(() => {
         if (data) {
+            console.log('🎉', data)
             emptyCart()
         }
     }, [data])
@@ -26,18 +22,22 @@ export default function Success() {
         <div>
             <div className='container xl:max-w-screen-xl mx-auto py-12 px-6 text-center'>
                 {
-                    error && data ? (
+                    error ? (
                         <div className='text-red-600'>
-                            An error occurred while processing your order.
+                            Lo sentimos, hubo un error con tu pago.
+                        </div>
+                    ) : !data ? (
+                        <div className='text-red-600'>
+                            Cargando...
                         </div>
                     ) : (
                         <>
                             <h1 className='text-3xl font-bold'>
-                                Thank you for your order!
+                                ¡Gracias por tu compra!
                             </h1>
                             <p className='text-lg'>
-                                Your order has been received and will be processed
-                                as soon as possible.
+                                Tu pedido se ha procesado correctamente. 
+                                En breve recibirás un correo electrónico con los detalles de tu compra.
                             </p>
                             {/* <p className='text-lg'>
                                 Your order number is: {data.order_id}
