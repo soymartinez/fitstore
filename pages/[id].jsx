@@ -24,13 +24,13 @@ export default function ProductDetails({ data }) {
             data: { id },
         } = await axios.post('/api/checkout', {
             items: Object.entries(items).map(([_, { id, quantity }]) => ({
-                price: 'price_1LBtYoJYhcdVbcJUrDkaJiUh',
+                price: id,
                 quantity,
             })),
         })
 
         const stripe = await getStripe()
-        await stripe.redirectToCheckout({ sessionId: 'price_1LBtYoJYhcdVbcJUrDkaJiUh' })
+        await stripe.redirectToCheckout({ sessionId: id })
     }
     return (
         <Layout title={`${name}`}>
