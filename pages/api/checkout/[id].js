@@ -7,15 +7,12 @@ export default async function handler(req, res) {
 
     try {
         if (!id.startsWith('cs_')) {
-            throw new Error('Invalid payment ID')
+            throw new Error('Incorrect CheckoutSession ID.')
         }
         const checkout_session = await stripe.checkout.sessions.retrieve(id)
 
         res.status(200).json(checkout_session)
     } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: 'Internal Server Error'
-        })
+        res.status(500).json({ statusCode: 500, message: error.message })
     }
 }
