@@ -9,7 +9,7 @@ import { TbShoppingCartOff, TbShoppingCartPlus } from 'react-icons/tb'
 import getStripe from 'lib/getstripe'
 
 export default function ProductDetails({ data }) {
-    const { name, brand, image, descriptions: { info, detail, weight, price, discountPrice, flavors, ingredients, benefits } } = data
+    const { name, brand, image, descriptions: { info, detail, use, weight, price, discountPrice, flavors, ingredients, benefits } } = data
     const [cart, setCart] = useState(false);
     const { addItem, items, updateItemQuantity, cartTotal, emptyCart } = useCart();
 
@@ -174,23 +174,29 @@ export default function ProductDetails({ data }) {
                         </div>
                         <div className='grid-rows-1 col-span-2'>
                             <div>
-                                <h1 className='text-lg text-white font-bold'>Ingredientes:</h1>
+                                <h1 className='text-lg text-white font-bold my-2'>Ingredientes:</h1>
                                 <ul className='list-disc'>
                                     {
                                         ingredients.map((item, index) => {
-                                            return <li className='py-2 mx-8 marker:text-blue-500' key={index}>{item}</li>
+                                            return <li className='mx-8 marker:text-blue-500' key={index}>{item}</li>
                                         })
                                     }
                                 </ul>
                             </div>
                             <div>
-                                <h1 className='text-lg text-white font-bold'>Beneficios:</h1>
+                                <h1 className='text-lg text-white font-bold my-2'>Beneficios:</h1>
                                 <ul className='list-disc'>
                                     {
                                         benefits.map((item, index) => {
                                             return <li className='mx-8 marker:text-blue-500' key={index}>{item}</li>
                                         })
                                     }
+                                </ul>
+                            </div>
+                            <div>
+                                <h1 className='text-lg text-white font-bold my-2'>Remendaciones:</h1>
+                                <ul className='list-disc'>
+                                    <li className='mx-8 marker:text-blue-500'>{use}</li>
                                 </ul>
                             </div>
                         </div>
