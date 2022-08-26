@@ -1,8 +1,7 @@
 import Image from 'next/image'
-import Description from './description'
 
 export default function ProductView({ product }) {
-    const { name, brand, image, descriptions: { info, detail, price, discountPrice, weight, flavors } } = product
+    const { name, brand, image, descriptions: { info, detail, use, price, discountPrice, weight, flavors, ingredients, benefits } } = product
 
     return (
         <article className='md:grid grid-cols-2 p-4 relative bg-[#222537] rounded-md border border-solid border-slate-700'>
@@ -51,7 +50,32 @@ export default function ProductView({ product }) {
                 </h1>
             </div>
             <div className='grid-rows-1 col-span-2'>
-                <Description product={product.descriptions} />
+                <div>
+                    <h1 className='text-lg text-white font-bold my-2'>Ingredientes:</h1>
+                    <ul className='list-disc'>
+                        {
+                            ingredients.map((item, index) => {
+                                return <li className='mx-8 marker:text-blue-500' key={index}>{item}</li>
+                            })
+                        }
+                    </ul>
+                </div>
+                <div>
+                    <h1 className='text-lg text-white font-bold my-2'>Beneficios:</h1>
+                    <ul className='list-disc'>
+                        {
+                            benefits.map((item, index) => {
+                                return <li className='mx-8 marker:text-blue-500' key={index}>{item}</li>
+                            })
+                        }
+                    </ul>
+                </div>
+                <div>
+                    <h1 className='text-lg text-white font-bold my-2'>Remendaciones:</h1>
+                    <ul className='list-disc'>
+                        <li className='mx-8 marker:text-blue-500'>{use}</li>
+                    </ul>
+                </div>
             </div>
         </article>
     )
