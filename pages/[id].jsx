@@ -7,10 +7,9 @@ import { useState } from 'react'
 import { AiFillCloseCircle, AiOutlineShopping } from 'react-icons/ai'
 import { TbShoppingCartOff, TbShoppingCartPlus } from 'react-icons/tb'
 import getStripe from 'lib/getstripe'
-import Description from 'components/description'
 
 export default function ProductDetails({ data }) {
-    const { name, brand, image, descriptions: { info, detail, weight, price, discountPrice, flavors } } = data
+    const { name, brand, image, descriptions: { info, detail, weight, price, discountPrice, flavors, ingredients, benefits } } = data
     const [cart, setCart] = useState(false);
     const { addItem, items, updateItemQuantity, cartTotal, emptyCart } = useCart();
 
@@ -174,7 +173,26 @@ export default function ProductDetails({ data }) {
                             </h1>
                         </div>
                         <div className='grid-rows-1 col-span-2'>
-                            <Description product={data.descriptions} />
+                            <div>
+                                <h1 className='text-lg text-white font-bold'>Ingredientes:</h1>
+                                <ul className='list-disc'>
+                                    {
+                                        ingredients.map((item, index) => {
+                                            return <li className='py-2 mx-8 marker:text-blue-500' key={index}>{item}</li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div>
+                                <h1 className='text-lg text-white font-bold'>Beneficios:</h1>
+                                <ul className='list-disc'>
+                                    {
+                                        benefits.map((item, index) => {
+                                            return <li className='mx-8 marker:text-blue-500' key={index}>{item}</li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </article>
                 </div>
