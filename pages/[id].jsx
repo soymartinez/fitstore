@@ -194,7 +194,7 @@ export default function ProductDetails({ data }) {
                                 </ul>
                             </div>
                             <div>
-                                <h1 className='text-lg text-white font-bold my-2'>Remendaciones:</h1>
+                                <h1 className='text-lg text-white font-bold my-2'>Recomendaciones:</h1>
                                 <ul className='list-disc'>
                                     <li className='mx-8 marker:text-blue-500'>{use}</li>
                                 </ul>
