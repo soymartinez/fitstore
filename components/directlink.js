@@ -12,7 +12,11 @@ export default function DirectLink({ href, children }) {
             <a
                 href={`#${href}`}
                 title='Direct link to heading'>
-                <span className={`${isHovered ? 'opacity-100 underline' : 'opacity-0'} text-blue-500 transition-all`}>#</span>
+                <span className={`text-blue-500 transition-all
+                    ${isHovered ? 'opacity-100 underline' : 'opacity-0'}
+                `}>
+                    #
+                </span>
             </a>
         </h3>
     )
